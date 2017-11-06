@@ -75,8 +75,8 @@ public class Database extends SQLiteOpenHelper {
         return b;
     }
 
-    public Contact getContact(String username) {
-        Contact c = new Contact();
+    public User getContact(String username) {
+        User c = new User();
         db = this.getReadableDatabase();
         String query = "select username, password, firstname, lastname from"+TABLE_NAME + "where username = "+username;
         Cursor cursor = db.rawQuery(query, null);
