@@ -75,8 +75,8 @@ public class Database {
         return b;
     }
 
-    public User getContact(String username) {
-        User c = new User();
+    public Contact getContact(String username) {
+        Contact c = new Contact();
         db = this.getReadableDatabase();
         String query = "select username, password, firstname, lastname from"+TABLE_NAME + "where username = "+username;
         Cursor cursor = db.rawQuery(query, null);
