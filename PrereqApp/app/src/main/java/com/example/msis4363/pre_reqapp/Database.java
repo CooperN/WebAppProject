@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Cooper on 11/6/2017.
  */
 
-public class Database {
+
 public class Database extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
@@ -29,12 +29,10 @@ public class Database extends SQLiteOpenHelper {
 
     //this is the constructor method
     public Helper (Context context) {
-    public Database (Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     //insert query method
-    public void insertContact (Contact c) {
     public void insertContact (User c) {
         db = this.getWritableDatabase();
         //store values from different fields

@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/PrereqApp.iml" filepath="$PROJECT_DIR$/PrereqApp.iml" />
-      <module fileurl="file://D:\Git\WebAppProject\PrereqApp\PrereqApp.iml" filepath="D:\Git\WebAppProject\PrereqApp\PrereqApp.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/PrereqApp.iml" filepath="$PROJECT_DIR$/.idea/PrereqApp.iml" />
->>>>>>> parent of 6136c54... Merge branch 'Work' of https://github.com/CooperN/WebAppProject into Work
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Git\WebAppProject\PrereqApp\app\app.iml" filepath="D:\Git\WebAppProject\PrereqApp\app\app.iml" />
     </modules>
   </component>
 </project>

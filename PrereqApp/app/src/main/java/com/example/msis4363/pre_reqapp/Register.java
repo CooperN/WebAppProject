@@ -29,16 +29,18 @@ public class Register extends AppCompatActivity {
         String firstnamestr = firstname.getText().toString();
         String lastnamestr = lastname.getText().toString();
 
-        Contact c = new Contact();
-        c.setUsername(usernamstr);
-        c.setPassword(passwordstr);
+        User u = new User();
+        u.setUsername(usernamstr);
+        u.setPassword(passwordstr);
         //Use methods form Contact class to set name fields in DB
-        c.setFirstname(firstnamestr);
-        c.setLastname(lastnamestr);
+        u.setFirstName(firstnamestr);
+        u.setLastName(lastnamestr);
 
-        helper.insertContact(c);
+        //NEIL
+        //This code is to insert the variables from above into the database
+     //   helper.insertUser(u);
 
-        Intent intent = new Intent(getApplicationContext(), LogIn.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
     }
 }
