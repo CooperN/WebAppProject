@@ -17,10 +17,13 @@ public class Login extends AppCompatActivity {
     public void onLogin(View v){
 
         //Save login information
-        EditText userName = (EditText) findViewById(R.id.userName);
-        EditText userPass = (EditText) findViewById(R.id.userPass);
+        EditText fieldUserName = (EditText) findViewById(R.id.userName);
+        EditText fieldUserPass = (EditText) findViewById(R.id.userPass);
 
-        String userName =
+        String userName = fieldUserName.getText().toString().toLowerCase();
+        String password = fieldUserPass.getText().toString();
+
+
 
 
     }

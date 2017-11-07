@@ -9,8 +9,6 @@ import android.widget.EditText;
 
 public class Register extends AppCompatActivity {
 
-    Database helper = new Database(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
