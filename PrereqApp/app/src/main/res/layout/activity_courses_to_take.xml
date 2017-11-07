@@ -54,7 +54,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_weight="1.04"
-            android:id="@+id/toTakeList"
+            android:id="@+id/classesToTakeList"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_height="100dp"/>
