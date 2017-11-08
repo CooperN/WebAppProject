@@ -26,12 +26,12 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="82dp"
-            android:layout_height="59dp"
-            app:srcCompat="@drawable/osu"
             android:id="@+id/imageView8"
+            android:layout_width="95dp"
+            android:layout_height="65dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ostatelogo" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -133,29 +133,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text"
-            android:gravity="center"
-            android:textSize="14sp"
-            android:textColor="?android:attr/colorFocusedHighlight"
-            android:textStyle="bold" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/textfields"
-            android:paddingLeft="10dip"
-            android:paddingTop="5dip"
-            android:paddingBottom="5dip"
-            android:id="@+id/uPassRepeat"
-            android:textSize="24sp"
-            android:textColor="?android:attr/colorFocusedHighlight" />
-
-        <TextView
-            android:text="REPEAT PASSWORD"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
             android:gravity="center"
             android:textSize="14sp"
             android:textColor="?android:attr/colorFocusedHighlight"

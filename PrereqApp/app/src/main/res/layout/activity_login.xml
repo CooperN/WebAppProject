@@ -25,12 +25,12 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imageView8"
             android:layout_width="192dp"
             android:layout_height="142dp"
-            app:srcCompat="@drawable/osu"
-            android:id="@+id/imageView8"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ostatelogo" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -108,15 +108,15 @@
                 android:textSize="14sp" />
 
             <Button
-                android:text="SIGNUP"
+                android:id="@+id/btnSignUp"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnSignUp"
                 android:layout_weight="1"
-                android:textSize="14sp"
-                android:textColor="@android:color/background_light"
                 android:background="@drawable/buttons"
-                android:onClick="btnSignUpClick"/>
+                android:onClick="btnSignUpClick"
+                android:text="REGISTER"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

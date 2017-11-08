@@ -27,11 +27,10 @@
 
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="64dp"
             android:layout_height="63dp"
-            app:srcCompat="@drawable/osu"
-            android:id="@+id/imageView"
-            />
+            app:srcCompat="@drawable/ostatelogo" />
 
         <LinearLayout
             android:orientation="vertical"

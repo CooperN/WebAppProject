@@ -28,12 +28,12 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imageView8"
             android:layout_width="64dp"
             android:layout_height="63dp"
-            app:srcCompat="@drawable/osu"
-            android:id="@+id/imageView8"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ostatelogo" />
 
         <LinearLayout
             android:orientation="vertical"
