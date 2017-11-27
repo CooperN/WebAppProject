@@ -35,12 +35,7 @@ public class Database extends AppCompatActivity {
     public Connection con;
     String un,pass,db,ip;
 
-    private String TABLE_NAME = "";
 
-    //Empty constructor method, coming back to fix this
-    public Database (Context context) {
-
-    }
 
 
 

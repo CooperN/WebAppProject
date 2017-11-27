@@ -19,6 +19,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.*;
+
 
 public class Login extends AppCompatActivity {
 
@@ -52,6 +54,16 @@ public class Login extends AppCompatActivity {
         // Declaring Server ip, username, database name and password
 
         // Setting up the function when button login is clicked
+        /*run.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+                checkLogin.execute("");
+            }
+        });*/
+
         run.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -168,7 +180,7 @@ public class Login extends AppCompatActivity {
         return connection;
     }
 
-    public void btnLogin(View v) {
+    /*public void btnLogin(View v) {
         EditText username = (EditText) findViewById(R.id.userName);
         EditText password = (EditText) findViewById(R.id.userPass);
 
@@ -183,5 +195,5 @@ public class Login extends AppCompatActivity {
     public void btnSignUpClick(View v) {
         Intent intent = new Intent(getApplicationContext(), Register.class);
         startActivity(intent);
-    }
+    }*/
 }
