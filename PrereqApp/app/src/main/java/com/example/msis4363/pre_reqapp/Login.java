@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
     String un,pass,db,ip;
 
     public Button run;
+    public Button register;
     public TextView message;
     public ProgressBar progressBar;
 
@@ -40,6 +41,8 @@ public class Login extends AppCompatActivity {
         // End Getting values from button, texts and progress bar
         run = (Button) findViewById(R.id.btnLogin);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        register = (Button) findViewById(R.id.btnSignUp);
+
 
         // Declaring Server ip, username, database name and password
         ip = "huckleberries.database.windows.net:1433";
@@ -56,6 +59,16 @@ public class Login extends AppCompatActivity {
             {
                 CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
                 checkLogin.execute("");
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getApplicationContext(), Register.class);
+                startActivity(intent);
             }
         });
     }
@@ -155,24 +168,12 @@ public class Login extends AppCompatActivity {
         return connection;
     }
 
-    public void onFirstRegister(View v) {
-        EditText username = (EditText) findViewById(R.id.registerUser);
-        EditText password = (EditText) findViewById(R.id.registerPass);
-        //add in name fields to Register
-        EditText firstname = (EditText) findViewById(R.id.registerFirstName);
-        EditText lastname = (EditText) findViewById(R.id.registerLastName);
+    public void btnLogin(View v) {
+        EditText username = (EditText) findViewById(R.id.userName);
+        EditText password = (EditText) findViewById(R.id.userPass);
 
         String usernamstr = username.getText().toString();
         String passwordstr = password.getText().toString();
-        String firstnamestr = firstname.getText().toString();
-        String lastnamestr = lastname.getText().toString();
-
-        User u = new User();
-        u.setUsername(usernamstr);
-        u.setPassword(passwordstr);
-        //Use methods form Contact class to set name fields in DB
-        u.setFirstName(firstnamestr);
-        u.setLastName(lastnamestr);
 
 
         Intent intent = new Intent(getApplicationContext(), Login.class);
