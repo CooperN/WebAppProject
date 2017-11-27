@@ -1,6 +1,7 @@
 package com.example.msis4363.pre_reqapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -154,5 +155,32 @@ public class Login extends AppCompatActivity {
         return connection;
     }
 
+    public void onFirstRegister(View v) {
+        EditText username = (EditText) findViewById(R.id.registerUser);
+        EditText password = (EditText) findViewById(R.id.registerPass);
+        //add in name fields to Register
+        EditText firstname = (EditText) findViewById(R.id.registerFirstName);
+        EditText lastname = (EditText) findViewById(R.id.registerLastName);
 
+        String usernamstr = username.getText().toString();
+        String passwordstr = password.getText().toString();
+        String firstnamestr = firstname.getText().toString();
+        String lastnamestr = lastname.getText().toString();
+
+        User u = new User();
+        u.setUsername(usernamstr);
+        u.setPassword(passwordstr);
+        //Use methods form Contact class to set name fields in DB
+        u.setFirstName(firstnamestr);
+        u.setLastName(lastnamestr);
+
+
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+        startActivity(intent);
+    }
+
+    public void btnSignUpClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), Register.class);
+        startActivity(intent);
+    }
 }
