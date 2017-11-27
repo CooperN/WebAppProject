@@ -137,26 +137,6 @@ public class Database extends AppCompatActivity {
         return connection;
     }
 
-   /* public String searchPass (String username) {
 
-        String query = "select username, password, firstname, lastname from "+TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        String a,b;
-        b = "not found";
-        if (cursor.moveToFirst()){
-            do{
-                a = cursor.getString(0);
-                if (a.equals(username))
-                {
-                    b = cursor.getString(1);
-                    break;
-                }
-            }
-            while (cursor.moveToNext());
-
-
-        }
-        return b;
-    }*/
 
 }

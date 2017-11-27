@@ -89,7 +89,14 @@ public class Login extends AppCompatActivity {
     {
         String z = "";
         Boolean isSuccess = false;
+        String un = "";
+        String pw = "";
         String name1 = "";
+
+        EditText a = (EditText) findViewById(R.id.userName);
+        String userstr = a.getText().toString();
+        EditText b = (EditText) findViewById(R.id.userPass);
+        String passstr = b.getText().toString();
 
 
         protected void onPreExecute()
@@ -122,15 +129,25 @@ public class Login extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "select * from NeilAllen";
+                    String query = "select username, pw from Student where username = '" + userstr + "';";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if(rs.next())
                     {
-                        name1= rs.getString("LName"); //Name is the string label of a column in database, read through the select query
-                        z = "query successful";
-                        isSuccess=true;
-                        con.close();
+                        un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
+                        pw = rs.getString("pw");
+
+                        if(userstr.equals(un) && passstr.equals(pw)){
+                            isSuccess = false;
+                            con.close();
+                            Intent intent = new Intent(getApplicationContext(), ProgramSelection.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            z = "Invalid Login";
+                            isSuccess = true;
+                            con.close();
+                        }
                     }
                     else
                     {
@@ -190,10 +207,10 @@ public class Login extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
-    }
+    }*/
 
     public void btnSignUpClick(View v) {
         Intent intent = new Intent(getApplicationContext(), Register.class);
         startActivity(intent);
-    }*/
+    }
 }

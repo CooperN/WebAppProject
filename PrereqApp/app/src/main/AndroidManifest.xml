@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Database"/>
+        <activity android:name=".ProgramSelection"/>
+        <activity android:name=".Register"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
