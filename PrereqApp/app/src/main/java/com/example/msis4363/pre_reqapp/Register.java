@@ -27,10 +27,9 @@ public class Register extends AppCompatActivity {
     public Connection con;
     String un,pass,fname,lname,db,ip;
 
-    public Button run;
-    public Button register;
-    public TextView message;
+    public Button insert;
     public ProgressBar progressBar;
+    public TextView message;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,10 +39,8 @@ public class Register extends AppCompatActivity {
 
 
         // End Getting values from button, texts and progress bar
-        run = (Button) findViewById(R.id.btnLogin);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        register = (Button) findViewById(R.id.btnSignUp);
-
+        insert = (Button) findViewById(R.id.Register);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
 
         // Declaring Server ip, username, database name and password
         ip = "huckleberries.database.windows.net:1433";
@@ -52,18 +49,7 @@ public class Register extends AppCompatActivity {
         pass = "Equifax1";
         // Declaring Server ip, username, database name and password
 
-        // Setting up the function when button login is clicked
-        /*run.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
-            }
-        });*/
-
-        run.setOnClickListener(new View.OnClickListener()
+        insert.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -73,15 +59,6 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public class CheckLogin extends AsyncTask<String,String,String>
@@ -90,13 +67,20 @@ public class Register extends AppCompatActivity {
         Boolean isSuccess = false;
         String un = "";
         String pw = "";
+        String fname = "";
+        String lname = "";
         String name1 = "";
 
-        EditText a = (EditText) findViewById(R.id.userName);
+        EditText a = (EditText) findViewById(R.id.registerUser);
         String userstr = a.getText().toString();
-        EditText b = (EditText) findViewById(R.id.userPass);
+        EditText b = (EditText) findViewById(R.id.registerPass);
         String passstr = b.getText().toString();
-
+        EditText c = (EditText) findViewById(R.id.registerFirstName);
+        String fnamestr = c.getText().toString();
+        EditText d = (EditText) findViewById(R.id.registerPass);
+        String lnamestr = d.getText().toString();
+        EditText e = (EditText) findViewById(R.id.registerPass);
+        String pidstr = e.getText().toString();
 
         protected void onPreExecute()
         {
@@ -128,31 +112,13 @@ public class Register extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "select username, pw from Student where username = '" + userstr + "';";
+                    String query = "INSERT INTO '" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', '" + pidstr + "';";
                     Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-                    if(rs.next())
-                    {
-                        un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
-                        pw = rs.getString("pw");
 
-                        if(userstr.equals(un) && passstr.equals(pw)){
-                            isSuccess = false;
-                            con.close();
-                            Intent intent = new Intent(getApplicationContext(), Login.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            z = "Invalid Login";
-                            isSuccess = true;
-                            con.close();
-                        }
-                    }
-                    else
-                    {
-                        z = "User does not exist";
-                        isSuccess = false;
-                    }
+                    isSuccess = true;
+                    con.close();
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
                 }
             }
             catch (Exception ex)

@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
         // Declaring Server ip, username, database name and password
 
         // Setting up the function when button login is clicked
-        /*run.setOnClickListener(new View.OnClickListener()
+        /*insert.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
