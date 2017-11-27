@@ -151,7 +151,7 @@ public class Login extends AppCompatActivity {
                     }
                     else
                     {
-                        z = "Invalid Query!";
+                        z = "User does not exist";
                         isSuccess = false;
                     }
                 }
