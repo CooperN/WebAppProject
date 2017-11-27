@@ -142,7 +142,7 @@ public class Database extends AppCompatActivity {
         return connection;
     }
 
-    public String searchPass (String username) {
+   /* public String searchPass (String username) {
 
         String query = "select username, password, firstname, lastname from "+TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
@@ -162,6 +162,6 @@ public class Database extends AppCompatActivity {
 
         }
         return b;
-    }
+    }*/
 
 }
