@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
 
         protected void onPreExecute()
         {
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
         }
 
         @Override
@@ -140,7 +140,7 @@ public class Login extends AppCompatActivity {
                         if(userstr.equals(un) && passstr.equals(pw)){
                             isSuccess = false;
                             con.close();
-                            Intent intent = new Intent(getApplicationContext(), ProgramSelection.class);
+                            Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
                             startActivity(intent);
                         }
                         else {
