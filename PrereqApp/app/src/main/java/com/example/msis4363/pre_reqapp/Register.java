@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,10 +66,6 @@ public class Register extends AppCompatActivity {
     {
         String z = "";
         Boolean isSuccess = false;
-        String un = "";
-        String pw = "";
-        String fname = "";
-        String lname = "";
         String name1 = "";
 
         EditText a = (EditText) findViewById(R.id.registerUser);
@@ -79,8 +76,8 @@ public class Register extends AppCompatActivity {
         String fnamestr = c.getText().toString();
         EditText d = (EditText) findViewById(R.id.registerPass);
         String lnamestr = d.getText().toString();
-        EditText e = (EditText) findViewById(R.id.registerPass);
-        String pidstr = e.getText().toString();
+        Spinner e = (Spinner) findViewById(R.id.spinner);
+        String pidstr = e.getSelectedItem().toString();
 
         protected void onPreExecute()
         {
@@ -112,7 +109,7 @@ public class Register extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "INSERT INTO '" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', '" + pidstr + "';";
+                    String query = "INSERT INTO Student VALUES '" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', '" + pidstr + "';";
                     Statement stmt = con.createStatement();
 
                     isSuccess = true;
