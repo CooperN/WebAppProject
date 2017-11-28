@@ -140,19 +140,16 @@
             android:layout_height="35dp"
             android:layout_weight="0.14">
 
-<<<<<<< HEAD
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-=======
+
             <ProgressBar
                 android:id="@+id/progressBar2"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
->>>>>>> 264b6cd1e53157620c3f182ff68505b8a8aa2c58
 
             android:padding="5dp"
         </LinearLayout>

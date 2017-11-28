@@ -83,7 +83,7 @@ public class ClassesToTake extends AppCompatActivity {
                     ResultSetMetaData rsmd = rs.getMetaData();
 
                     while (ResultSet.next()){
-                        c
+
                     }
 
 
