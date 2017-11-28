@@ -84,15 +84,15 @@ public class ClassesToTake extends AppCompatActivity {
                     ResultSetMetaData rsmd = rs.getMetaData();
 
 
-                    String[] ClassList;
+                    /*String[] ClassList;
                     while(rs.next()) {
                         ClassList.add(rs.getString(3));
                     }
 
-                    ArrayAdapter adapter = new ArrayAdapter<Course>(this, R.layout.activity_courses_to_take, ClassList);
+                    ArrayAdapter adapter = new ArrayAdapter<Course>(this, R.layout.activity_courses_to_take, ClassList);*/
 
-                    ListView listView = (ListView) findViewById(R.id.classesToTakeList);
-                    listView.setAdapter(adapter);
+                    /*ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+                    listView.setAdapter(adapter);*/
 
 
 
