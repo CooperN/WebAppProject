@@ -1,44 +1,165 @@
 package com.example.msis4363.pre_reqapp;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Register extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    // Declaring connection variables
+    public Connection con;
+    String un,pass,fname,lname,db,ip;
+
+    public Button insert;
+    public ProgressBar progressBar;
+    public TextView message;
+
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+
+
+        // End Getting values from button, texts and progress bar
+        insert = (Button) findViewById(R.id.Register);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+
+        // Declaring Server ip, username, database name and password
+        ip = "huckleberries.database.windows.net:1433";
+        db = "PrereqDB";
+        un = "hberryadmin";
+        pass = "Equifax1";
+        // Declaring Server ip, username, database name and password
+
+        insert.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Register.CheckLogin checkLogin = new Register.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+                checkLogin.execute("");
+            }
+        });
+
     }
 
-    public void onFirstRegister(View v) {
-        EditText username = (EditText) findViewById(R.id.registerUser);
-        EditText password = (EditText) findViewById(R.id.registerPass);
-        //add in name fields to Register
-        EditText firstname = (EditText) findViewById(R.id.registerFirstName);
-        EditText lastname = (EditText) findViewById(R.id.registerLastName);
+    public class CheckLogin extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String un = "";
+        String pw = "";
+        String fname = "";
+        String lname = "";
+        String name1 = "";
 
-        String usernamstr = username.getText().toString();
-        String passwordstr = password.getText().toString();
-        String firstnamestr = firstname.getText().toString();
-        String lastnamestr = lastname.getText().toString();
+        EditText a = (EditText) findViewById(R.id.registerUser);
+        String userstr = a.getText().toString();
+        EditText b = (EditText) findViewById(R.id.registerPass);
+        String passstr = b.getText().toString();
+        EditText c = (EditText) findViewById(R.id.registerFirstName);
+        String fnamestr = c.getText().toString();
+        EditText d = (EditText) findViewById(R.id.registerPass);
+        String lnamestr = d.getText().toString();
+        EditText e = (EditText) findViewById(R.id.registerPass);
+        String pidstr = e.getText().toString();
 
-        User u = new User();
-        u.setUsername(usernamstr);
-        u.setPassword(passwordstr);
-        //Use methods form Contact class to set name fields in DB
-        u.setFirstName(firstnamestr);
-        u.setLastName(lastnamestr);
+        protected void onPreExecute()
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
-        //NEIL
-        //This code is to insert the variables from above into the database
-     //   helper.insertUser(u);
+        @Override
+        protected void onPostExecute(String r)
+        {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(Register.this, r, Toast.LENGTH_LONG).show();
+            if(isSuccess)
+            {
+                message = (TextView) findViewById(R.id.textView2);
+                message.setText(name1);
 
-        Intent intent = new Intent(getApplicationContext(), Login.class);
-        startActivity(intent);
+            }
+        }
+        @Override
+        protected String doInBackground(String... params)
+        {
+            try
+            {
+                con = connectionclass();        // Connect to database
+                if (con == null)
+                {
+                    z = "Check Your Internet Access!";
+                }
+                else
+                {
+                    // Change below query according to your own database.
+                    String query = "INSERT INTO '" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', '" + pidstr + "';";
+                    Statement stmt = con.createStatement();
+
+                    isSuccess = true;
+                    con.close();
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d ("sql error", z);
+            }
+            return z;
+        }
     }
+
+    @SuppressLint("NewApi")
+    public Connection connectionclass()
+    {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String ConnectionURL = null;
+        try
+        {
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            //your database connection string goes below
+            ConnectionURL = "jdbc:jtds:sqlserver://huckleberries.database.windows.net:1433;DatabaseName=PrereqDB;user=hberryadmin@huckleberries;password=Equifax1;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+            //ConnectionURL = "jdbc:jtds:sqlserver://huckleberries.database.windows.net:1433;DatabaseName=PrereqDB;user=hberryadmin@huckleberries;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+            connection = DriverManager.getConnection(ConnectionURL);
+        }
+        catch (SQLException se)
+        {
+            Log.e("error here 1 : ", se.getMessage());
+        }
+        catch (ClassNotFoundException e)
+        {
+            Log.e("error here 2 : ", e.getMessage());
+        }
+        catch (Exception e)
+        {
+            Log.e("error here 3 : ", e.getMessage());
+        }
+        return connection;
+    }
+
 }
