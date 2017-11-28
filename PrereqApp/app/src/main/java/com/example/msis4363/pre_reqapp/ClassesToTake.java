@@ -83,26 +83,32 @@ public class ClassesToTake extends AppCompatActivity {
                     ResultSet rs = stmt.executeQuery(query);
                     ResultSetMetaData rsmd = rs.getMetaData();
 
-<<<<<<< HEAD
-                    List<String> ClassList = new ArrayList<String>();
-                    while(rs.next())
-                        ClassList.add(rs.getString(3));
-=======
-                    while (ResultSet.next()){
 
+                    String[] ClassList;
+                    while(rs.next()) {
+                        ClassList.add(rs.getString(3));
                     }
+
+                    ArrayAdapter adapter = new ArrayAdapter<Course>(this, R.layout.activity_courses_to_take, ClassList);
+
+                    ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+                    listView.setAdapter(adapter);
+
+
+
+
 
 
                     cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
                     cnum = rs.getString("number");
 
-                    classlist.add(new Course(cname, cnum));
 
 
 
 
 
->>>>>>> ef0a5838680684218a5a9710652d1e05d5fd6bec
+
+
 
 
                 }
