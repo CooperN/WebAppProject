@@ -60,7 +60,8 @@ public class ClassesToTake extends AppCompatActivity {
         String cnum = "";
         String name1 = "";
 
-        List<Course> classlist = new ArrayList<>();
+        ListView lv;
+        ArrayList<Course> ClassList;
 
         @Override
         protected String doInBackground(String... params)
@@ -76,14 +77,19 @@ public class ClassesToTake extends AppCompatActivity {
                 {
 
                     // Change below query according to your own database.
-                    ResultSet = result;
+
                     String query = "select * from Course";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     ResultSetMetaData rsmd = rs.getMetaData();
 
+<<<<<<< HEAD
+                    List<String> ClassList = new ArrayList<String>();
+                    while(rs.next())
+                        ClassList.add(rs.getString(3));
+=======
                     while (ResultSet.next()){
-                        c
+
                     }
 
 
@@ -96,6 +102,7 @@ public class ClassesToTake extends AppCompatActivity {
 
 
 
+>>>>>>> ef0a5838680684218a5a9710652d1e05d5fd6bec
 
 
                 }
