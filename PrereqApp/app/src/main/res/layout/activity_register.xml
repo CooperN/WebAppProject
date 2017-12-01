@@ -135,15 +135,31 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="0.07"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_weight="0.14">
 
-            <Spinner
-                android:id="@+id/spinner"
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/textfields"
+                android:text="Select Your Major Below:" />
+
+            <Spinner
+                android:id="@+id/registrationspinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@drawable/textfields"
+                android:popupBackground="@android:drawable/alert_dark_frame"
+                android:visibility="visible" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"
@@ -162,15 +178,15 @@
             android:orientation="vertical"></LinearLayout>
 
         <Button
-            android:text="SIGNUP"
+            android:id="@+id/Register"
             android:layout_width="150dp"
             android:layout_height="5dp"
-            android:id="@+id/Register"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@android:color/background_light"
             android:background="@drawable/buttons"
-            android:onClick="onSignUpClick"/>
+            android:onClick="onSignUpClick"
+            android:text="REGISTER"
+            android:textColor="@android:color/background_light"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:orientation="vertical"
