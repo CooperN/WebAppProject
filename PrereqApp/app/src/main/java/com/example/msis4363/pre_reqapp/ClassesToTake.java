@@ -45,17 +45,20 @@ public class ClassesToTake extends AppCompatActivity {
     private ArrayList<String> arrayListToDo;
     private ArrayAdapter<String> arrayAdapterToDo;
 
+    private String selectedChoice = "";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_to_take);
-
         arrayListToDo = new ArrayList<String>();
         arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo);
-        ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+        final ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+
         listView.setAdapter(arrayAdapterToDo);
+
 
         run = (Button) findViewById(R.id.run);
 
@@ -190,6 +193,27 @@ public class ClassesToTake extends AppCompatActivity {
             Log.e("error here 3 : ", e.getMessage());
         }
         return connection;
+    }
+
+    public void castSelectedItem (View v) {
+        ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+        ArrayList<String> toSend = new ArrayList<String>();
+        String a ="";
+        //this will loop through each item in the list and checks if they are selected.
+        for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
+            if (listView.isItemChecked(i)){
+
+                a = a + arrayListToDo.get(i);
+                toSend.add(arrayListToDo.get(i));
+
+            }
+        }
+        Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent (this, FinishedCourses.class);
+        //this is how you send multiple strings to next activity
+        intent.putStringArrayListExtra("toSend", toSend);
+        startActivity(intent);
+
     }
 
 }
