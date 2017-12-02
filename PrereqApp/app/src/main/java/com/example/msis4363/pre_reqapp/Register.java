@@ -12,13 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,10 +24,10 @@ public class Register extends AppCompatActivity {
 
     // Declaring connection variables
     public Connection con;
-    String un,pass,fname,lname,db,ip;
+    String un,pass,db,ip;
 
     public Button insert;
-    public ProgressBar progressBar;
+    public ProgressBar progressBar2;
     public TextView message;
 
     protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +39,7 @@ public class Register extends AppCompatActivity {
 
         // End Getting values from button, texts and progress bar
         insert = (Button) findViewById(R.id.Register);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
 
         // Declaring Server ip, username, database name and password
         ip = "huckleberries.database.windows.net:1433";
@@ -55,14 +53,14 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Register.CheckLogin checkLogin = new Register.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
+                Insert Insert = new Insert();// this is the Asynctask, which is used to process in background to reduce load on app process
+                Insert.execute("");
             }
         });
 
     }
 
-    public class CheckLogin extends AsyncTask<String,String,String>
+    public class Insert extends AsyncTask<String,String,String>
     {
         String z = "";
         Boolean isSuccess = false;
@@ -74,20 +72,20 @@ public class Register extends AppCompatActivity {
         String passstr = b.getText().toString();
         EditText c = (EditText) findViewById(R.id.registerFirstName);
         String fnamestr = c.getText().toString();
-        EditText d = (EditText) findViewById(R.id.registerPass);
+        EditText d = (EditText) findViewById(R.id.registerLastName);
         String lnamestr = d.getText().toString();
         /*Spinner e = (Spinner) findViewById(R.id.spinner);
         String pidstr = e.getSelectedItem().toString();*/
 
         protected void onPreExecute()
         {
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar2.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String r)
         {
-            progressBar.setVisibility(View.GONE);
+            progressBar2.setVisibility(View.GONE);
             Toast.makeText(Register.this, r, Toast.LENGTH_LONG).show();
             if(isSuccess)
             {
@@ -96,6 +94,8 @@ public class Register extends AppCompatActivity {
 
             }
         }
+
+
         @Override
         protected String doInBackground(String... params)
         {
@@ -109,11 +109,13 @@ public class Register extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "INSERT INTO Student VALUES '" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', 1;";
+                    String query = "INSERT INTO Student VALUES ('" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', 1);";
                     // '" + pidstr + "'
                     Statement stmt = con.createStatement();
-
-                    isSuccess = true;
+                    stmt.executeUpdate(query);
+                    name1 = "Insert sucessful";
+                    z = "query successful";
+                    isSuccess=true;
                     con.close();
                     Intent intent = new Intent(getApplicationContext(), Login.class);
                     startActivity(intent);

@@ -209,8 +209,8 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }*/
 
-    public void btnSignUpClick(View v) {
+    /*public void btnSignUpClick(View v) {
         Intent intent = new Intent(getApplicationContext(), Register.class);
         startActivity(intent);
-    }
+    }*/
 }
