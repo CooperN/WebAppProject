@@ -88,12 +88,6 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"></LinearLayout>
 
-        <Button
-            android:id="@+id/run"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickLogin"
-            android:text="Button" />
 
 
     </LinearLayout>
