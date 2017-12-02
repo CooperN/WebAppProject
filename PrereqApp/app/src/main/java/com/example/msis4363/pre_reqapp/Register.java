@@ -76,8 +76,8 @@ public class Register extends AppCompatActivity {
         String fnamestr = c.getText().toString();
         EditText d = (EditText) findViewById(R.id.registerPass);
         String lnamestr = d.getText().toString();
-        Spinner e = (Spinner) findViewById(R.id.spinner);
-        String pidstr = e.getSelectedItem().toString();
+        /*Spinner e = (Spinner) findViewById(R.id.spinner);
+        String pidstr = e.getSelectedItem().toString();*/
 
         protected void onPreExecute()
         {
