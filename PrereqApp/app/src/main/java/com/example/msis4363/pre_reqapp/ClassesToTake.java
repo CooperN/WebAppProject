@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.transform.Result;
@@ -36,36 +39,81 @@ import javax.xml.transform.Result;
 public class ClassesToTake extends AppCompatActivity {
 
     public Connection con;
-    String cname,cnum;
-    public ListView result;
-    public ArrayList<String> classes;
+    public TextView message;
+    public Button run;
+    //public ProgressBar progressBar;
+    private ArrayList<String> arrayListToDo;
+    private ArrayAdapter<String> arrayAdapterToDo;
 
-    public class Course {
-        private String cname;
-        private String cnum;
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_to_take);
 
+        arrayListToDo = new ArrayList<String>();
+        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo);
+        ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+        listView.setAdapter(arrayAdapterToDo);
+
+        run = (Button) findViewById(R.id.run);
+
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        run.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+                checkLogin.execute("");
+            }
+        });
+
+
+
     }
 
-    public class CheckLogin extends AsyncTask<String,String,String>
+    public class CheckLogin extends AsyncTask<String,String,ArrayList<String>>
     {
         String z = "";
         Boolean isSuccess = false;
-        String cname = "";
-        String cnum = "";
         String name1 = "";
 
-        ListView lv;
-        ArrayList<Course> ClassList;
+        protected void onPreExecute()
+        {
+
+            //progressBar.setVisibility(View.VISIBLE);
+
+
+
+        }
 
         @Override
-        protected String doInBackground(String... params)
+        protected void onPostExecute(ArrayList<String> r)
         {
+            //note the input type of the onPostExecute is changed into ArrayList<String>, which is the output from doInBackGround method
+            //progressBar.setVisibility(View.GONE);
+            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            //iterate through the arrayList and write it into your
+            Iterator<String> iterator = r.iterator();
+            while (iterator.hasNext()) {
+                arrayAdapterToDo.add(iterator.next().toString());
+            }
+
+            if(isSuccess)
+            {
+                message = (TextView) findViewById(R.id.textView2);
+                message.setText(name1);
+
+            }
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(String... params)
+        {
+            ArrayList<String> names = null;
             try
             {
                 con = connectionclass();        // Connect to database
@@ -81,36 +129,26 @@ public class ClassesToTake extends AppCompatActivity {
                     String query = "select * from Course";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
-                    ResultSetMetaData rsmd = rs.getMetaData();
 
+                    names = new ArrayList<String>();
+                    while (rs.next()){
+                        String cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
+                        String cnum = rs.getString("number");
+                        String title = cname + " " + cnum;
 
-                    /*String[] ClassList;
-                    while(rs.next()) {
-                        ClassList.add(rs.getString(3));
+                        names.add(title);
                     }
 
-                    ArrayAdapter adapter = new ArrayAdapter<Course>(this, R.layout.activity_courses_to_take, ClassList);*/
+                    if (rs.next()) {
+                        name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
+                        z = "query successful";
+                        isSuccess = true;
+                        con.close();
 
-                    /*ListView listView = (ListView) findViewById(R.id.classesToTakeList);
-                    listView.setAdapter(adapter);*/
-
-
-
-
-
-
-                    cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
-                    cnum = rs.getString("number");
-
-
-
-
-
-
-
-
-
-
+                    } else {
+                        z = "Invalid Query!";
+                        isSuccess = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -120,7 +158,7 @@ public class ClassesToTake extends AppCompatActivity {
 
                 Log.d ("sql error", z);
             }
-            return z;
+            return names;
         }
     }
 
