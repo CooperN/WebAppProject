@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pre-reqApp</string>
+    <string name="title_activity_main_menu">mainMenu</string>
 </resources>
