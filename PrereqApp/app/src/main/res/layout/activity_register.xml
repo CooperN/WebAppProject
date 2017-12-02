@@ -19,11 +19,18 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="0.07"
+            android:background="@drawable/grey"
             app:srcCompat="@drawable/osu" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="0.07"
+            android:orientation="vertical"></LinearLayout>
 
         <EditText
             android:id="@+id/registerFirstName"
