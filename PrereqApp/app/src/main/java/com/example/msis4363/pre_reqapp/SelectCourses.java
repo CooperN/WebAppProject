@@ -243,6 +243,7 @@ public class SelectCourses extends AppCompatActivity {
                     isSuccess=true;
                     con.close();
                     Intent intent = new Intent(getApplicationContext(), ClassSummary.class);
+                    intent.putExtra("studentid", studentId);
                     startActivity(intent);
                 }
             }
