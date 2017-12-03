@@ -5,7 +5,7 @@
     android:id="@+id/activity_courses_to_take"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.msis4363.pre_reqapp.ClassesToTake"
+    tools:context="com.example.msis4363.pre_reqapp.ClassSummary"
     android:background="@android:color/background_light">
 
     <LinearLayout
