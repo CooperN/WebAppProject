@@ -54,10 +54,12 @@ public class ClassesToTake extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_to_take);
         arrayListToDo = new ArrayList<String>();
-        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo);
+        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.checkrow, R.id.programRow, arrayListToDo);
         final ListView listView = (ListView) findViewById(R.id.classesToTakeList);
 
         listView.setAdapter(arrayAdapterToDo);
+
+        final String user = getIntent().getStringExtra("username");
 
 
         run = (Button) findViewById(R.id.run);
