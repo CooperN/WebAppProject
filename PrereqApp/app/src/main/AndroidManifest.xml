@@ -18,12 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Database" />
-        <activity android:name=".ProgramSelection" />
         <activity android:name=".Register" />
-        <activity android:name=".ClassesToTake" />
+        <activity android:name=".ClassSummary" />
         <activity android:name=".Main"></activity>
-        <activity android:name=".FinishedCourses"></activity>
+        <activity android:name=".SelectCourses"></activity>
     </application>
 
 </manifest>

@@ -18,13 +18,13 @@ public class Main extends AppCompatActivity {
     }
 
     public void btnClassesToTake(View v) {
-        Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
+        Intent intent = new Intent(getApplicationContext(), ClassSummary.class);
         intent.putExtra("studentid", studentId);
         startActivity(intent);
     }
 
     public void btnFinishedCourses(View v) {
-        Intent intent2 = new Intent(getApplicationContext(), FinishedCourses.class);
+        Intent intent2 = new Intent(getApplicationContext(), SelectCourses.class);
         intent2.putExtra("studentid", studentId);
         startActivity(intent2);
     }
