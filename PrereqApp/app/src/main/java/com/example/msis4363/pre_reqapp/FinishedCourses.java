@@ -148,7 +148,7 @@ public class FinishedCourses extends AppCompatActivity {
 
                     // Change below query according to your own database.
 
-                    String query = "select * from Course";
+                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programidIN (Select programid FROM StudentDegree WHERE studentid = 1))AND courseid NOT IN (SELECT courseid FROM CoursesTaken WHERE studentid =1)";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
