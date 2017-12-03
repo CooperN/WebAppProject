@@ -140,7 +140,7 @@ public class Login extends AppCompatActivity {
                         if(userstr.equals(un) && passstr.equals(pw)){
                             isSuccess = false;
                             con.close();
-                            Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
+                            Intent intent = new Intent(getApplicationContext(), mainMenu.class);
                             startActivity(intent);
                         }
                         else {

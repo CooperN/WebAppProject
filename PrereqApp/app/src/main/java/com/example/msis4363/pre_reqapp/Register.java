@@ -114,7 +114,7 @@ public class Register extends AppCompatActivity {
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     name1 = "Insert sucessful";
-                    z = "query successful";
+                    z = "Sucessful Registration";
                     isSuccess=true;
                     con.close();
                     Intent intent = new Intent(getApplicationContext(), Login.class);
