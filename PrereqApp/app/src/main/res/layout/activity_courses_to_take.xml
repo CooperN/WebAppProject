@@ -35,17 +35,17 @@
         </LinearLayout>
 
         <TextView
-            android:text="Your course suggestions:"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/textView"
+            android:background="@drawable/buttons"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Recommended Courses:"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
-            android:background="@drawable/buttons"
-            android:textStyle="normal|bold"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dp"/>
+            android:textStyle="normal|bold" />
 
         <ListView
             android:layout_width="match_parent"
