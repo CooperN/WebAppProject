@@ -49,6 +49,7 @@ public class ClassesToTake extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,7 @@ public class ClassesToTake extends AppCompatActivity {
 
         listView.setAdapter(arrayAdapterToDo);
 
-        final String user = getIntent().getStringExtra("username");
+        String user = getIntent().getStringExtra("username");
 
 
         run = (Button) findViewById(R.id.run);
@@ -86,6 +87,7 @@ public class ClassesToTake extends AppCompatActivity {
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
+        String user = getIntent().getStringExtra("username");
 
         protected void onPreExecute()
         {
@@ -132,7 +134,7 @@ public class ClassesToTake extends AppCompatActivity {
 
                     // Change below query according to your own database.
 
-                    String query = "select * from Course";
+                    String query = "select * from CoursesTaken WHERE studentid = " + user + ";";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 

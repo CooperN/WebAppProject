@@ -78,6 +78,17 @@ public class FinishedCourses extends AppCompatActivity {
             }
         });
 
+        next.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                InsertClassesTaken insertClassesTaken = new InsertClassesTaken();// this is the Asynctask, which is used to process in background to reduce load on app process
+                insertClassesTaken.execute();
+
+            }
+        });
+
         //listView.setItemChecked(position, value);
 
 
@@ -196,17 +207,17 @@ public class FinishedCourses extends AppCompatActivity {
             //progressBar.setVisibility(View.GONE);
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             //iterate through the arrayList and write it into your
-            Iterator<String> iterator = r.iterator();
+            /*Iterator<String> iterator = r.iterator();
             while (iterator.hasNext()) {
                 arrayAdapterToDo.add(iterator.next().toString());
-            }
+            }*/
 
-            if(isSuccess)
+            /*if(isSuccess)
             {
                 message = (TextView) findViewById(R.id.textView2);
                 message.setText(name1);
 
-            }
+            }*/
         }
 
         @Override
