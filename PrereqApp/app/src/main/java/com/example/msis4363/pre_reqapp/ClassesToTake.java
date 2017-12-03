@@ -40,11 +40,14 @@ public class ClassesToTake extends AppCompatActivity {
 
     public Connection con;
     public TextView message;
-    public Button run;
-    //public ProgressBar progressBar;
+
+
     private ArrayList<String> arrayListToDo;
     private ArrayAdapter<String> arrayAdapterToDo;
+    private ArrayList<String> arrayListToDo2;
+    private ArrayAdapter<String> arrayAdapterToDo2;
     private String selectedChoice = "";
+    ArrayList<Integer> ids = null;
     Integer studentId;
 
 
@@ -56,27 +59,22 @@ public class ClassesToTake extends AppCompatActivity {
         setContentView(R.layout.activity_courses_to_take);
         studentId = getIntent().getIntExtra("studentid", 0);
         arrayListToDo = new ArrayList<String>();
-        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.checkrow, R.id.programRow, arrayListToDo);
+        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo);
         final ListView listView = (ListView) findViewById(R.id.classesToTakeList);
 
         listView.setAdapter(arrayAdapterToDo);
 
-        String user = getIntent().getStringExtra("username");
+        arrayListToDo2 = new ArrayList<String>();
+        arrayAdapterToDo2 = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo2);
+        final ListView listView2 = (ListView) findViewById(R.id.prereqList);
+        listView2.setAdapter(arrayAdapterToDo2);
 
 
-        run = (Button) findViewById(R.id.run);
 
-        //progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        run.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
-            }
-        });
+        CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+        checkLogin.execute("");
+        CheckHavent checkhavent = new CheckHavent();
+        checkhavent.execute("");
 
 
 
@@ -88,6 +86,7 @@ public class ClassesToTake extends AppCompatActivity {
         Boolean isSuccess = false;
         String name1 = "";
         String user = getIntent().getStringExtra("username");
+
 
         protected void onPreExecute()
         {
@@ -134,7 +133,7 @@ public class ClassesToTake extends AppCompatActivity {
 
                     // Change below query according to your own database.
 
-                    String query = "select * from CoursesTaken WHERE studentid = " + user + ";";
+                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ");";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
@@ -166,6 +165,98 @@ public class ClassesToTake extends AppCompatActivity {
                 Log.d ("sql error", z);
             }
             return names;
+        }
+    }
+
+    public class CheckHavent extends AsyncTask<String,String,ArrayList<String>>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+
+            //progressBar.setVisibility(View.VISIBLE);
+
+
+
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> r)
+        {
+            //note the input type of the onPostExecute is changed into ArrayList<String>, which is the output from doInBackGround method
+            //progressBar.setVisibility(View.GONE);
+            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            //iterate through the arrayList and write it into your
+            Iterator<String> iterator = r.iterator();
+            while (iterator.hasNext()) {
+                arrayAdapterToDo2.add(iterator.next().toString());
+            }
+
+            if(isSuccess)
+            {
+                message = (TextView) findViewById(R.id.textView2);
+                message.setText(name1);
+
+            }
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(String... params)
+        {
+            ArrayList<String> names2 = null;
+            try
+            {
+                con = connectionclass();        // Connect to database
+                if (con == null)
+                {
+                    z = "Check Your Internet Access!";
+                }
+                else
+                {
+
+                    // Change below query according to your own database.
+
+                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ");";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    names2 = new ArrayList<String>();
+                    ids = new ArrayList<Integer>();
+                    while (rs.next()){
+                        String title = rs.getString("name"); //Name is the string label of a column in database, read through the select query
+
+                        Integer courseid = rs.getInt("courseid");
+
+                        names2.add(title);
+                        ids.add(courseid);
+                    }
+
+
+
+
+                    if (rs.next()) {
+                        name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
+                        z = "query successful";
+                        isSuccess = true;
+                        con.close();
+
+                    } else {
+                        z = "Invalid Query!";
+                        isSuccess = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+
+                Log.d ("sql error", z);
+            }
+            return names2;
         }
     }
 

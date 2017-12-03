@@ -40,7 +40,7 @@ public class FinishedCourses extends AppCompatActivity {
 
     public Connection con;
     public TextView message;
-    public Button refresh, next;
+    public Button next;
     //public ProgressBar progressBar;
     private ArrayList<String> arrayListToDo;
     private ArrayAdapter<String> arrayAdapterToDo;
@@ -63,20 +63,12 @@ public class FinishedCourses extends AppCompatActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(arrayAdapterToDo);
 
-        refresh = (Button) findViewById(R.id.btnRefresh);
+
         next = (Button) findViewById(R.id.btnCourseNext);
 
-        final String user = getIntent().getStringExtra("username");
+        studentId = getIntent().getIntExtra("studentid", 0);
 
-        refresh.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
-            }
-        });
+
 
         next.setOnClickListener(new View.OnClickListener()
         {
@@ -88,6 +80,9 @@ public class FinishedCourses extends AppCompatActivity {
 
             }
         });
+
+        CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+        checkLogin.execute("");
 
         //listView.setItemChecked(position, value);
 
@@ -148,7 +143,7 @@ public class FinishedCourses extends AppCompatActivity {
 
                     // Change below query according to your own database.
 
-                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = 1)) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = 1);";
+                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ");";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
@@ -247,9 +242,11 @@ public class FinishedCourses extends AppCompatActivity {
                     for (int i=0; i<toSend.size(); i++){
                         String query = "INSERT INTO CoursesTaken VALUES (" + studentId + ", " + toSend.get(i)+ ", 1);";
                         finalQuery = finalQuery + " " + query;
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(finalQuery);
                     }
-                    Statement stmt = con.createStatement();
-                    stmt.executeUpdate(finalQuery);
+                    /*Statement stmt = con.createStatement();
+                    stmt.executeUpdate(finalQuery);*/
 
                     name1 = "Insert sucessful";
                     z = "Sucessful Registration";
