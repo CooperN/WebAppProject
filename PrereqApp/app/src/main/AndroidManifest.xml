@@ -23,6 +23,7 @@
         <activity android:name=".Register" />
         <activity android:name=".ClassesToTake" />
         <activity android:name=".Main"></activity>
+        <activity android:name=".FinishedCourses"></activity>
     </application>
 
 </manifest>

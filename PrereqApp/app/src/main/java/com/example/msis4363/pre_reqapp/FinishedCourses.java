@@ -44,6 +44,9 @@ public class FinishedCourses extends AppCompatActivity {
     //public ProgressBar progressBar;
     private ArrayList<String> arrayListToDo;
     private ArrayAdapter<String> arrayAdapterToDo;
+    public Integer position;
+    public Boolean value;
+    private String selectedChoice = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +54,15 @@ public class FinishedCourses extends AppCompatActivity {
         setContentView(R.layout.activity_finished_courses);
 
         arrayListToDo = new ArrayList<String>();
-        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo);
+        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.checkrow, R.id.programRow, arrayListToDo);
         final ListView listView = (ListView) findViewById(R.id.classList);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(arrayAdapterToDo);
+
         refresh = (Button) findViewById(R.id.btnRefresh);
         next = (Button) findViewById(R.id.btnCourseNext);
+
+        final String user = getIntent().getStringExtra("username");
 
         refresh.setOnClickListener(new View.OnClickListener()
         {
@@ -66,6 +73,9 @@ public class FinishedCourses extends AppCompatActivity {
                 checkLogin.execute("");
             }
         });
+
+        //listView.setItemChecked(position, value);
+
 
 
 
@@ -135,6 +145,9 @@ public class FinishedCourses extends AppCompatActivity {
 
                         names.add(title);
                     }
+
+
+
 
                     if (rs.next()) {
                         name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
