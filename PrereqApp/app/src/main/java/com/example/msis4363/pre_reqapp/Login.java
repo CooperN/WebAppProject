@@ -141,7 +141,7 @@ public class Login extends AppCompatActivity {
                             isSuccess = false;
                             con.close();
 
-                            Intent intent = new Intent(getApplicationContext(), mainMenu.class);
+                            Intent intent = new Intent(getApplicationContext(), Main.class);
                             intent.putExtra("username", un);
                             startActivity(intent);
                             finish();

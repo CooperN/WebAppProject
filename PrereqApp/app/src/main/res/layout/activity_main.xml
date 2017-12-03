@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.msis4363.pre_reqapp.mainMenu"
-    tools:showIn="@layout/activity_main_menu">
+    tools:context="com.example.msis4363.pre_reqapp.Main">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,18 +17,16 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/selectButton"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="selectCoursesButtonClick"
-                android:text="Select Courses Taken" />
+                android:text="Button" />
 
             <Button
-                android:id="@+id/summaryButton"
+                android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="summaryPageButtonClick"
-                android:text="Summary Page" />
+                android:text="Button" />
 
             <Button
                 android:id="@+id/button3"
