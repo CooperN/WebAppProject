@@ -41,11 +41,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/buttons"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:text="Recommended Courses:"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            android:textStyle="normal|bold" />
+            android:paddingLeft="20dp" />
 
         <ListView
             android:layout_width="match_parent"
@@ -85,13 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"></LinearLayout>
 
-        <Button
-            android:id="@+id/run"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttons"
-            android:onClick="onClickLogin"
-            android:text="Find Classes" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

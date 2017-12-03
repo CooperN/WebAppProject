@@ -8,6 +8,13 @@
     tools:context="com.example.msis4363.pre_reqapp.Register"
     android:background="@android:color/background_light">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/grey" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,9 +41,11 @@
 
         <EditText
             android:id="@+id/registerFirstName"
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
+            android:alpha=".9"
             android:background="@drawable/textfields"
+            android:backgroundTint="@android:color/background_light"
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingBottom="5dip"
@@ -59,10 +68,12 @@
 
         <EditText
             android:id="@+id/registerLastName"
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:alpha=".9"
             android:background="@drawable/textfields"
+            android:backgroundTint="@android:color/background_light"
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingBottom="5dip"
@@ -85,10 +96,12 @@
 
         <EditText
             android:id="@+id/registerUser"
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:alpha=".9"
             android:background="@drawable/textfields"
+            android:backgroundTint="@android:color/background_light"
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingBottom="5dip"
@@ -110,10 +123,12 @@
 
         <EditText
             android:id="@+id/registerPass"
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:alpha=".9"
             android:background="@drawable/textfields"
+            android:backgroundTint="@android:color/background_light"
             android:inputType="textPassword"
             android:paddingBottom="5dip"
             android:paddingLeft="10dip"
@@ -152,13 +167,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
                 <Spinner
                     android:id="@+id/registrationspinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:alpha=".9"
+                    android:background="@drawable/buttons"
+                    android:backgroundTint="@android:color/background_light"
+                    android:popupBackground="@drawable/buttons"
                     android:text="[Select a Degree Plan]"
                     android:visibility="visible" />
 

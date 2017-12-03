@@ -51,17 +51,19 @@
             android:orientation="vertical"></LinearLayout>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:background="@drawable/textfields"
             android:id="@+id/userName"
-            android:textSize="24sp"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:alpha=".95"
+            android:background="@drawable/textfields"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingBottom="5dip"
             android:paddingLeft="10dip"
             android:paddingTop="5dip"
-            android:paddingBottom="5dip"
-            android:textColor="?android:attr/colorFocusedHighlight" />
+            android:textColor="?android:attr/colorFocusedHighlight"
+            android:textSize="24sp" />
 
         <TextView
             android:text="USERNAME"
@@ -76,10 +78,12 @@
 
         <EditText
             android:id="@+id/userPass"
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:alpha=".95"
             android:background="@drawable/textfields"
+            android:backgroundTint="@android:color/background_light"
             android:inputType="textPassword"
             android:paddingBottom="5dip"
             android:paddingLeft="10dip"
@@ -123,9 +127,9 @@
                 android:background="@drawable/buttons"
                 android:onClick="btnLogin"
                 android:padding="3dp"
+
+
                 android:shape="rectangle"
-
-
                 android:text="LOGIN"
                 android:textColor="@android:color/background_light"
                 android:textSize="14sp" />

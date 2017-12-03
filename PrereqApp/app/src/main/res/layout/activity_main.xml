@@ -10,7 +10,8 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/osugardensbw" />
 
     <LinearLayout
@@ -20,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -39,9 +40,14 @@
         <Button
             android:id="@+id/selectBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="75dp"
+            android:alpha=".75"
+            android:background="@drawable/buttons"
             android:onClick="btnClassesToTake"
-            android:text="Class Summary Page" />
+            android:text="Class Summary Page"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textSize="20sp"
+            android:textStyle="normal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,9 +57,14 @@
         <Button
             android:id="@+id/summaryBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="75dp"
+            android:alpha=".75"
+            android:background="@drawable/buttons"
             android:onClick="btnFinishedCourses"
-            android:text="Select Courses" />
+            android:text="Select Courses"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textSize="20sp"
+            android:textStyle="normal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,9 +74,15 @@
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="75dp"
+            android:alpha=".75"
+            android:background="@drawable/buttons"
+            android:elevation="0dp"
             android:onClick="btnDegreeSheet"
-            android:text="Degree Plan" />
+            android:text="Degree Plan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textSize="20sp"
+            android:textStyle="normal" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
