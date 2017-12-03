@@ -139,13 +139,14 @@ public class FinishedCourses extends AppCompatActivity {
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
-                    names = new ArrayList<String>();
+                    names = new ArrayList<String, Integer>();
                     while (rs.next()){
                         String cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
                         String cnum = rs.getString("number");
+                        Integer courseid = rs.getInt("courseid");
                         String title = cname + " " + cnum;
 
-                        names.add(title);
+                        names.add(title, courseid);
                     }
 
 
@@ -173,6 +174,113 @@ public class FinishedCourses extends AppCompatActivity {
             return names;
         }
     }
+
+    public class InsertClassesTaken extends AsyncTask<String,String,ArrayList<String>>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+        String name1 = "";
+
+        protected void onPreExecute()
+        {
+
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> r)
+        {
+            //note the input type of the onPostExecute is changed into ArrayList<String>, which is the output from doInBackGround method
+            //progressBar.setVisibility(View.GONE);
+            //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
+            //iterate through the arrayList and write it into your
+            Iterator<String> iterator = r.iterator();
+            while (iterator.hasNext()) {
+                arrayAdapterToDo.add(iterator.next().toString());
+            }
+
+            if(isSuccess)
+            {
+                message = (TextView) findViewById(R.id.textView2);
+                message.setText(name1);
+
+            }
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(String... params)
+        {
+            ArrayList<String> names = null;
+            try
+            {
+                con = connectionclass();        // Connect to database
+                if (con == null)
+                {
+                    z = "Check Your Internet Access!";
+                }
+                else
+                {
+                    ListView listView = (ListView) findViewById(R.id.classList);
+                    ArrayList<String> toSend = new ArrayList<String>();
+                    String a ="";
+                    Integer j;
+                    //this will loop through each item in the list and checks if they are selected.
+                    for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
+                        if (listView.isItemChecked(i)){
+                            Integer sid = null;
+                            j = 0;
+                            do{
+                                
+                            } while (sid = null);
+
+                            a = a + arrayListToDo.get(i);
+                            toSend.add(arrayListToDo.get(i));
+
+                        }
+                    }
+
+                    for (int i=0; i<toSend.size(); i++){
+                        Integer courseid = i + 1;
+                        String query = "INSERT INTO Student VALUES ();";
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(query);
+                    }
+
+
+                    name1 = "Insert sucessful";
+                    z = "Sucessful Registration";
+                    isSuccess=true;
+                    con.close();
+                    Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
+                    startActivity(intent);
+
+
+
+
+
+
+                    if (rs.next()) {
+                        name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
+                        z = "query successful";
+                        isSuccess = true;
+                        con.close();
+
+                    } else {
+                        z = "Invalid Query!";
+                        isSuccess = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+                Log.d ("sql error", z);
+            }
+            return names;
+        }
+    }
+
+
 
     @SuppressLint("NewApi")
     public Connection connectionclass()
@@ -211,6 +319,8 @@ public class FinishedCourses extends AppCompatActivity {
         //this will loop through each item in the list and checks if they are selected.
         for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
             if (listView.isItemChecked(i)){
+
+                while(){
 
                 a = a + arrayListToDo.get(i);
                 toSend.add(arrayListToDo.get(i));
