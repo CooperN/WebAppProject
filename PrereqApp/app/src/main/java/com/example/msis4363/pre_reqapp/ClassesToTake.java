@@ -138,9 +138,8 @@ public class ClassesToTake extends AppCompatActivity {
 
                     names = new ArrayList<String>();
                     while (rs.next()){
-                        String cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
-                        String cnum = rs.getString("number");
-                        String title = cname + " " + cnum;
+                        String title = rs.getString("name"); //Name is the string label of a column in database, read through the select query
+
 
                         names.add(title);
                     }

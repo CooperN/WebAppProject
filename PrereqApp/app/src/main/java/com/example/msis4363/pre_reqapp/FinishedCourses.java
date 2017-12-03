@@ -144,10 +144,10 @@ public class FinishedCourses extends AppCompatActivity {
                     names = new ArrayList<String>();
                     ids = new ArrayList<Integer>();
                     while (rs.next()){
-                        String cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
-                        String cnum = rs.getString("number");
+                        String title = rs.getString("name"); //Name is the string label of a column in database, read through the select query
+
                         Integer courseid = rs.getInt("courseid");
-                        String title = cname + " " + cnum;
+
                         names.add(title);
                         ids.add(courseid);
                     }
