@@ -91,6 +91,7 @@ public class Login extends AppCompatActivity {
         Boolean isSuccess = false;
         String un = "";
         String pw = "";
+        Integer sid;
         String name1 = "";
 
         EditText a = (EditText) findViewById(R.id.userName);
@@ -129,20 +130,21 @@ public class Login extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "select username, pw from Student where username = '" + userstr + "';";
+                    String query = "select username, pw, studentid from Student where username = '" + userstr + "';";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if(rs.next())
                     {
                         un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
                         pw = rs.getString("pw");
+                        sid = rs.getInt("studentid");
 
                         if(userstr.equals(un) && passstr.equals(pw)){
                             isSuccess = false;
                             con.close();
 
                             Intent intent = new Intent(getApplicationContext(), Main.class);
-                            intent.putExtra("username", un);
+                            intent.putExtra("studentid", sid);
                             startActivity(intent);
                             finish();
                         }

@@ -44,8 +44,8 @@ public class ClassesToTake extends AppCompatActivity {
     //public ProgressBar progressBar;
     private ArrayList<String> arrayListToDo;
     private ArrayAdapter<String> arrayAdapterToDo;
-
     private String selectedChoice = "";
+    Integer studentId;
 
 
 
@@ -53,6 +53,7 @@ public class ClassesToTake extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_to_take);
+        studentId = getIntent().getIntExtra("studentid", 0);
         arrayListToDo = new ArrayList<String>();
         arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.checkrow, R.id.programRow, arrayListToDo);
         final ListView listView = (ListView) findViewById(R.id.classesToTakeList);

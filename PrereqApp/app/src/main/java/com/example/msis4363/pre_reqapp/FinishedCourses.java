@@ -47,11 +47,13 @@ public class FinishedCourses extends AppCompatActivity {
     public Integer position;
     public Boolean value;
     private String selectedChoice = "";
+    Integer studentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finished_courses);
+        studentId = getIntent().getIntExtra("studentid", 0);
 
         arrayListToDo = new ArrayList<String>();
         arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.checkrow, R.id.programRow, arrayListToDo);
