@@ -224,7 +224,7 @@ public class SelectCourses extends AppCompatActivity {
                     //this will loop through each item in the list and checks if they are selected.
                     for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
                         if (listView.isItemChecked(i)){
-                            toSend.add(ids.get(i + 1));
+                            toSend.add(ids.get(i));
                         }
                     }
 
