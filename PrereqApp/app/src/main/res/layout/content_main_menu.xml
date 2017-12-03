@@ -19,16 +19,18 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/selectButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:onClick="selectCoursesButtonClick"
+                android:text="Select Courses Taken" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/summaryButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:onClick="summaryPageButtonClick"
+                android:text="Summary Page" />
 
             <Button
                 android:id="@+id/button3"
