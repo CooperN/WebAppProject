@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="majors_array">
+        <item>MSIS</item>
+        <item>Finance</item>
+        <item>Accounting</item>
+        <item>Marketing</item>
+    </string-array>
+</resources>
