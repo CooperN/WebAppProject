@@ -15,33 +15,17 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         final String user = getIntent().getStringExtra("username");
-
-    }
-
-    public void selectCoursesButtonClick (View v) {
-        Intent intent = new Intent(getApplicationContext(), FinishedCourses.class);
-        intent.putExtra("username", user);
-        startActivity(intent);
-    }
-
-    public void summaryButtonClick (View v) {
-        Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
-        intent.putExtra("username", user);
-        startActivity(intent);
     }
 
     public void btnClassesToTake(View v) {
         Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
         startActivity(intent);
-
     }
 
     public void btnFinishedCourses(View v) {
         Intent intent2 = new Intent(getApplicationContext(), FinishedCourses.class);
         startActivity(intent2);
-
     }
 
     public void btnDegreeSheet(View v) {

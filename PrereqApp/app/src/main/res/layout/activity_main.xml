@@ -11,36 +11,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/selectBtn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:onClick="btnClassesToTake"
+            android:text="Class Summary Page" />
 
-            <Button
-                android:id="@+id/selectBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="btnClassesToTake"
-                android:text="Class Summary" />
-                android:onClick="selectCoursesButtonClick"
-                android:text="Select Courses" />
+        <Button
+            android:id="@+id/summaryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnFinishedCourses"
+            android:text="Select Courses" />
 
-            <Button
-                android:id="@+id/summaryBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="btnFinishedCourses"
-                android:text="Finished Corses" />
-                android:onClick="summaryButtonClick"
-                android:text="Class Summary Page" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="btnDegreeSheet"
-                android:text="Degree Plan" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnDegreeSheet"
+            android:text="Degree Plan" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
