@@ -1,5 +1,6 @@
 package com.example.msis4363.pre_reqapp;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,35 +17,29 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.*;
 
-
-public class Login extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     // Declaring connection variables
     public Connection con;
     String un,pass,db,ip;
 
-    public Button run;
-    public Button register;
+    public Button insert;
+    public ProgressBar progressBar2;
     public TextView message;
-    public ProgressBar progressBar;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
 
 
         // End Getting values from button, texts and progress bar
-        run = (Button) findViewById(R.id.btnLogin);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        register = (Button) findViewById(R.id.btnSignUp);
-
+        insert = (Button) findViewById(R.id.Register);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
 
         // Declaring Server ip, username, database name and password
         ip = "huckleberries.database.windows.net:1433";
@@ -53,62 +48,45 @@ public class Login extends AppCompatActivity {
         pass = "Equifax1";
         // Declaring Server ip, username, database name and password
 
-        // Setting up the function when button login is clicked
-        /*insert.setOnClickListener(new View.OnClickListener()
+        insert.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
-            }
-        });*/
-
-        run.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
+                Insert Insert = new Insert();// this is the Asynctask, which is used to process in background to reduce load on app process
+                Insert.execute("");
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
-                startActivity(intent);
-            }
-        });
     }
 
-    public class CheckLogin extends AsyncTask<String,String,String>
+    public class Insert extends AsyncTask<String,String,String>
     {
         String z = "";
         Boolean isSuccess = false;
-        String un = "";
-        String pw = "";
         String name1 = "";
 
-        EditText a = (EditText) findViewById(R.id.userName);
+        EditText a = (EditText) findViewById(R.id.registerUser);
         String userstr = a.getText().toString();
-        EditText b = (EditText) findViewById(R.id.userPass);
+        EditText b = (EditText) findViewById(R.id.registerPass);
         String passstr = b.getText().toString();
-
+        EditText c = (EditText) findViewById(R.id.registerFirstName);
+        String fnamestr = c.getText().toString();
+        EditText d = (EditText) findViewById(R.id.registerLastName);
+        String lnamestr = d.getText().toString();
+        /*Spinner e = (Spinner) findViewById(R.id.spinner);
+        String pidstr = e.getSelectedItem().toString();*/
 
         protected void onPreExecute()
         {
-            progressBar.setVisibility(View.GONE);
+            progressBar2.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String r)
         {
-            progressBar.setVisibility(View.GONE);
-            Toast.makeText(Login.this, r, Toast.LENGTH_LONG).show();
+            progressBar2.setVisibility(View.GONE);
+            Toast.makeText(Register.this, r, Toast.LENGTH_LONG).show();
             if(isSuccess)
             {
                 message = (TextView) findViewById(R.id.textView2);
@@ -116,6 +94,8 @@ public class Login extends AppCompatActivity {
 
             }
         }
+
+
         @Override
         protected String doInBackground(String... params)
         {
@@ -129,31 +109,16 @@ public class Login extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "select username, pw from Student where username = '" + userstr + "';";
+                    String query = "INSERT INTO Student VALUES ('" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', 1);";
+                    // '" + pidstr + "'
                     Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-                    if(rs.next())
-                    {
-                        un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
-                        pw = rs.getString("pw");
-
-                        if(userstr.equals(un) && passstr.equals(pw)){
-                            isSuccess = false;
-                            con.close();
-                            Intent intent = new Intent(getApplicationContext(), mainMenu.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            z = "Invalid Login";
-                            isSuccess = true;
-                            con.close();
-                        }
-                    }
-                    else
-                    {
-                        z = "User does not exist";
-                        isSuccess = false;
-                    }
+                    stmt.executeUpdate(query);
+                    name1 = "Insert sucessful";
+                    z = "Sucessful Registration";
+                    isSuccess=true;
+                    con.close();
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
                 }
             }
             catch (Exception ex)
@@ -197,20 +162,4 @@ public class Login extends AppCompatActivity {
         return connection;
     }
 
-    /*public void btnLogin(View v) {
-        EditText username = (EditText) findViewById(R.id.userName);
-        EditText password = (EditText) findViewById(R.id.userPass);
-
-        String usernamstr = username.getText().toString();
-        String passwordstr = password.getText().toString();
-
-
-        Intent intent = new Intent(getApplicationContext(), Login.class);
-        startActivity(intent);
-    }*/
-
-    /*public void btnSignUpClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), Register.class);
-        startActivity(intent);
-    }*/
 }

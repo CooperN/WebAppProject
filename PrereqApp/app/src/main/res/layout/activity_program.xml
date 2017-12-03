@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_prog_select"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.msis4363.pre_reqapp.ProgramSelection"
+    android:backgroundTint="@android:color/background_light">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="0.04"
+            android:layout_height="5dip">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="64dp"
+            android:layout_height="63dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ostatelogo" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="0.05"
+            android:layout_height="5dip"></LinearLayout>
+
+        <TextView
+            android:text="Select program of study:"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/textView"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:background="@drawable/buttons"
+            android:textStyle="normal|bold"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="154dp"
+            android:layout_weight="1.04"
+            android:id="@+id/programList"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></LinearLayout>
+
+        <Button
+            android:text="Next"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnProgNext"
+            android:background="@drawable/buttons"
+            android:textColor="@android:color/background_light"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_width="200dip" />
+
+    </LinearLayout>
+</RelativeLayout>
