@@ -48,6 +48,8 @@ public class FinishedCourses extends AppCompatActivity {
     public Boolean value;
     private String selectedChoice = "";
     Integer studentId;
+    ArrayList<Integer> ids = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,14 +141,15 @@ public class FinishedCourses extends AppCompatActivity {
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
-                    names = new ArrayList<String, Integer>();
+                    names = new ArrayList<String>();
+                    ids = new ArrayList<Integer>();
                     while (rs.next()){
                         String cname = rs.getString("name"); //Name is the string label of a column in database, read through the select query
                         String cnum = rs.getString("number");
                         Integer courseid = rs.getInt("courseid");
                         String title = cname + " " + cnum;
-
-                        names.add(title, courseid);
+                        names.add(title);
+                        ids.add(courseid);
                     }
 
 
@@ -220,31 +223,22 @@ public class FinishedCourses extends AppCompatActivity {
                 else
                 {
                     ListView listView = (ListView) findViewById(R.id.classList);
-                    ArrayList<String> toSend = new ArrayList<String>();
+                    ArrayList<Integer> toSend = new ArrayList<Integer>();
                     String a ="";
-                    Integer j;
                     //this will loop through each item in the list and checks if they are selected.
                     for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
                         if (listView.isItemChecked(i)){
-                            Integer sid = null;
-                            j = 0;
-                            do{
-                                
-                            } while (sid = null);
-
-                            a = a + arrayListToDo.get(i);
-                            toSend.add(arrayListToDo.get(i));
-
+                            toSend.add(ids.get(i + 1));
                         }
                     }
 
+                    String finalQuery = "";
                     for (int i=0; i<toSend.size(); i++){
-                        Integer courseid = i + 1;
-                        String query = "INSERT INTO Student VALUES ();";
-                        Statement stmt = con.createStatement();
-                        stmt.executeUpdate(query);
+                        String query = "INSERT INTO CoursesTaken VALUES (" + studentId + ", " + toSend.get(i)+ ", 1);";
+                        finalQuery = finalQuery + " " + query;
                     }
-
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(finalQuery);
 
                     name1 = "Insert sucessful";
                     z = "Sucessful Registration";
@@ -252,22 +246,6 @@ public class FinishedCourses extends AppCompatActivity {
                     con.close();
                     Intent intent = new Intent(getApplicationContext(), ClassesToTake.class);
                     startActivity(intent);
-
-
-
-
-
-
-                    if (rs.next()) {
-                        name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
-                        z = "query successful";
-                        isSuccess = true;
-                        con.close();
-
-                    } else {
-                        z = "Invalid Query!";
-                        isSuccess = false;
-                    }
                 }
             }
             catch (Exception ex)
@@ -319,9 +297,6 @@ public class FinishedCourses extends AppCompatActivity {
         //this will loop through each item in the list and checks if they are selected.
         for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
             if (listView.isItemChecked(i)){
-
-                while(){
-
                 a = a + arrayListToDo.get(i);
                 toSend.add(arrayListToDo.get(i));
 

@@ -109,8 +109,9 @@ public class Register extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "INSERT INTO Student VALUES ('" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', 1);";
+                    String query = "INSERT INTO Student VALUES ('" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', 1); INSERT IN";
                     // '" + pidstr + "'
+
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     name1 = "Insert sucessful";
