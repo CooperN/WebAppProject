@@ -8,7 +8,7 @@ import android.view.View;
 
 public class Main extends AppCompatActivity {
 
-
+/*private static int splash_time_out = 5000;*/
     Integer studentId;
 
     @Override
@@ -17,8 +17,13 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         studentId = getIntent().getIntExtra("studentid", 0);
         //this is for the splash screen
+    /*public void run(){
+        Intent loginIntent = new Intent(Main.this,splashScreen.class);
+        startActivity(loginIntent);
+        finish();
+    }
 
-
+    splash_time_out;*/
 }
 
     public void btnClassesToTake(View v) {

@@ -27,7 +27,7 @@
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="95dp"
             android:layout_weight="0.07"
             app:srcCompat="@drawable/osu" />
 
@@ -185,11 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-
         </LinearLayout>
-
-        android:padding="5dp"
-
 
         <Button
             android:id="@+id/Register"
@@ -204,7 +200,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="5dp"
             android:layout_weight="0.67"
             android:orientation="vertical"></LinearLayout>
 
