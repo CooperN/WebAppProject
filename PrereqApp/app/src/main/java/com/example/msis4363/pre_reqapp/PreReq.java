@@ -66,18 +66,14 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
         listView2.setAdapter(arrayAdapterToDo2);
 
         spinner.setOnItemSelectedListener(this);
-
-
-        PreReq.CheckHavent checkhavent = new PreReq.CheckHavent();
-        checkhavent.execute("");
-
-
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         selectedCourse = parent.getItemAtPosition((position)).toString();
+
+        PreReq.CheckHavent checkhavent = new PreReq.CheckHavent();
+        checkhavent.execute("");
     }
 
     @Override
@@ -190,6 +186,7 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
         @Override
         protected void onPostExecute(ArrayList<String> r)
         {
+            arrayAdapterToDo2.clear();
             //note the input type of the onPostExecute is changed into ArrayList<String>, which is the output from doInBackGround method
             //progressBar.setVisibility(View.GONE);
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
@@ -223,7 +220,7 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
 
                     // Change below query according to your own database.
 
-                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ");";
+                    String query = "SELECT * FROM Course WHERE courseid IN (SELECT prereqid FROM PreReq WHERE courseid = (SELECT courseid FROM Course where name = '" + selectedCourse + "')) ;";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
