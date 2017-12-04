@@ -126,7 +126,6 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
         protected void onPostExecute(String r)
         {
             progressBar2.setVisibility(View.GONE);
-            Toast.makeText(Register.this, r, Toast.LENGTH_LONG).show();
             if(isSuccess)
             {
                 message = (TextView) findViewById(R.id.textView2);
