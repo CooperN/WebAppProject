@@ -121,9 +121,10 @@
             android:layout_height="50dp"
             android:alpha=".7"
             android:background="@drawable/buttons"
+            android:onClick="btnDeleteCourses"
             android:shadowColor="@android:color/background_dark"
             android:shadowRadius="2"
-            android:text="Button"
+            android:text="Delete Courses"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -137,9 +138,10 @@
             android:layout_height="50dp"
             android:alpha=".7"
             android:background="@drawable/buttons"
+            android:onClick="btnProfile"
             android:shadowColor="@android:color/black"
             android:shadowRadius="2"
-            android:text="Button"
+            android:text="Profile"
             android:textSize="20sp" />
     </LinearLayout>
 

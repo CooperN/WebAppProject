@@ -78,7 +78,6 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         major = parent.getItemAtPosition((position)).toString();
-        Toast.makeText(parent.getContext(), "Selected: " + major, Toast.LENGTH_LONG).show();
     }
 
     @Override
