@@ -101,14 +101,13 @@ public class Login extends AppCompatActivity {
 
         protected void onPreExecute()
         {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String r)
         {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(Login.this, r, Toast.LENGTH_LONG).show();
             if(isSuccess)
             {
                 message = (TextView) findViewById(R.id.textView2);
@@ -141,7 +140,6 @@ public class Login extends AppCompatActivity {
                         if(userstr.equals(un) && passstr.equals(pw)){
                             isSuccess = false;
                             con.close();
-
                             Intent intent = new Intent(getApplicationContext(), LoginSplashScreen.class);
                             intent.putExtra("studentid", sid);
                             startActivity(intent);

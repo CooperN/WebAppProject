@@ -8,13 +8,9 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,18 +21,20 @@ import java.sql.Statement;
 public class LoginSplashScreen extends AppCompatActivity {
     Integer studentId;
 
+    // Declaring connection variables
+    public Connection con;
+    String un,pass,db,ip, fname, newText;
+    public TextView message;
+    public ProgressBar progressBar;
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
-
-    TextView t=(TextView)findViewById(R.id.textView4);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_splash_screen);
         studentId = getIntent().getIntExtra("studentid", 0);
-
 
         new Handler().postDelayed(new Runnable() {
 
@@ -58,81 +56,37 @@ public class LoginSplashScreen extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
-        // End Getting values from button, texts and progress bar
-        run = (Button) findViewById(R.id.btnLogin);
+
+
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        register = (Button) findViewById(R.id.btnSignUp);
-
-
-        // Declaring Server ip, username, database name and password
         ip = "huckleberries.database.windows.net:1433";
         db = "PrereqDB";
         un = "hberryadmin";
         pass = "Equifax1";
-        // Declaring Server ip, username, database name and password
 
-        // Setting up the function when button login is clicked
-        /*insert.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
-            }
-        });*/
-
-        run.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Login.CheckLogin checkLogin = new Login.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-                checkLogin.execute("");
-            }
-        });
-
-        register.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
-                startActivity(intent);
-            }
-        });
+        LoginSplashScreen.CheckLogin checkLogin = new LoginSplashScreen.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+        checkLogin.execute("");
     }
 
     public class CheckLogin extends AsyncTask<String,String,String>
     {
         String z = "";
         Boolean isSuccess = false;
-        String un = "";
-        String pw = "";
-        Integer sid;
-        String name1 = "";
-
-        EditText a = (EditText) findViewById(R.id.userName);
-        String userstr = a.getText().toString();
-        EditText b = (EditText) findViewById(R.id.userPass);
-        String passstr = b.getText().toString();
-
 
         protected void onPreExecute()
         {
             progressBar.setVisibility(View.GONE);
         }
-
         @Override
         protected void onPostExecute(String r)
         {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(Login.this, r, Toast.LENGTH_LONG).show();
             if(isSuccess)
             {
-                message = (TextView) findViewById(R.id.textView2);
-                message.setText(name1);
-
+                TextView t=(TextView)findViewById(R.id.textView4);
+                newText = "Welcome "+fname;
+                t.setText(newText);
             }
         }
         @Override
@@ -148,42 +102,20 @@ public class LoginSplashScreen extends AppCompatActivity {
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "select username, pw, studentid from Student where username = '" + userstr + "';";
+                    String query = "select fname from Student where studentid = '" + studentId + "';";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if(rs.next())
                     {
-                        un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
-                        pw = rs.getString("pw");
-                        sid = rs.getInt("studentid");
-
-                        if(userstr.equals(un) && passstr.equals(pw)){
-                            isSuccess = false;
-                            con.close();
-
-                            Intent intent = new Intent(getApplicationContext(), LoginSplashScreen.class);
-                            intent.putExtra("studentid", sid);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else {
-                            z = "Invalid Login";
-                            isSuccess = true;
-                            con.close();
-                        }
+                        fname = rs.getString("fname"); //Name is the string label of a column in database, read through the select query
                     }
-                    else
-                    {
-                        z = "User does not exist";
-                        isSuccess = false;
-                    }
+                    isSuccess = true;
                 }
             }
             catch (Exception ex)
             {
                 isSuccess = false;
                 z = ex.getMessage();
-
                 Log.d ("sql error", z);
             }
             return z;
