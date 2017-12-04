@@ -18,12 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login"/>
+        <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".ClassSummary" />
         <activity android:name=".Main" />
         <activity android:name=".SelectCourses" />
-        <activity android:name=".PreReq"></activity>
+        <activity android:name=".PreReq" />
+        <activity android:name=".DeleteCourses"></activity>
     </application>
 
 </manifest>

@@ -36,6 +36,18 @@ public class Main extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    public void btnDeleteCourses(View v) {
+        Intent intent2 = new Intent(getApplicationContext(), DeleteCourses.class);
+        intent2.putExtra("studentid", studentId);
+        startActivity(intent2);
+    }
+
+    public void btnProfile(View v) {
+        Intent intent2 = new Intent(getApplicationContext(), SelectCourses.class);
+        intent2.putExtra("studentid", studentId);
+        startActivity(intent2);
+    }
+
     public void btnDegreeSheet(View v) {
         String url = "https://business.okstate.edu/site-files/docs/msis/2016-2017-MIS.pdf";
         Intent i = new Intent(Intent.ACTION_VIEW);

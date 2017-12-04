@@ -8,10 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,71 +22,67 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DeleteCourses extends AppCompatActivity {
 
     public Connection con;
     public TextView message;
-
-
+    public Button next;
+    //public ProgressBar progressBar;
     private ArrayList<String> arrayListToDo;
     private ArrayAdapter<String> arrayAdapterToDo;
-    private ArrayList<String> arrayListToDo2;
-    private ArrayAdapter<String> arrayAdapterToDo2;
+    public Integer position;
+    public Boolean value;
     private String selectedChoice = "";
-    ArrayList<Integer> ids = null;
     Integer studentId;
-    String selectedCourse;
+    ArrayList<Integer> ids = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pre_req);
+        setContentView(R.layout.selectcourses);
         studentId = getIntent().getIntExtra("studentid", 0);
-        arrayListToDo = new ArrayList<String>();
-        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, arrayListToDo);
-        final ListView listView = (ListView) findViewById(R.id.classesToTakeList);
 
-        PreReq.CheckLogin checkLogin = new PreReq.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+        arrayListToDo = new ArrayList<String>();
+        arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.checkrow, R.id.programRow, arrayListToDo);
+        final ListView listView = (ListView) findViewById(R.id.classList);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setAdapter(arrayAdapterToDo);
+
+
+        next = (Button) findViewById(R.id.btnCourseNext);
+
+        studentId = getIntent().getIntExtra("studentid", 0);
+
+
+
+        next.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                DeleteCourses.InsertClassesTaken insertClassesTaken = new DeleteCourses.InsertClassesTaken();// this is the Asynctask, which is used to process in background to reduce load on app process
+                insertClassesTaken.execute();
+
+            }
+        });
+
+        DeleteCourses.CheckLogin checkLogin = new DeleteCourses.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
         checkLogin.execute("");
 
-        Spinner spinner = (Spinner) findViewById(R.id.prereqspinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        //ArrayAdapter<String> arrayAdapterToDo = ArrayAdapter.createFromResource(this,
-               // R.array.majors_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        arrayAdapterToDo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(arrayAdapterToDo);
+        //listView.setItemChecked(position, value);
 
-        arrayListToDo2 = new ArrayList<String>();
-        arrayAdapterToDo2 = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo2);
-        final ListView listView2 = (ListView) findViewById(R.id.prereqList);
-        listView2.setAdapter(arrayAdapterToDo2);
 
-        spinner.setOnItemSelectedListener(this);
-    }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedCourse = parent.getItemAtPosition((position)).toString();
-
-        PreReq.CheckHavent checkhavent = new PreReq.CheckHavent();
-        checkhavent.execute("");
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 
     public class CheckLogin extends AsyncTask<String,String,ArrayList<String>>
     {
         String z = "";
         Boolean isSuccess = false;
         String name1 = "";
-        String user = getIntent().getStringExtra("username");
-
 
         protected void onPreExecute()
         {
@@ -133,17 +128,24 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
                 {
 
                     // Change below query according to your own database.
-                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ") AND courseid IN (Select courseid from PreReq);";
+
+                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ");";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
                     names = new ArrayList<String>();
+                    ids = new ArrayList<Integer>();
                     while (rs.next()){
                         String title = rs.getString("name"); //Name is the string label of a column in database, read through the select query
 
+                        Integer courseid = rs.getInt("courseid");
 
                         names.add(title);
+                        ids.add(courseid);
                     }
+
+
+
 
                     if (rs.next()) {
                         name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
@@ -168,7 +170,7 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
         }
     }
 
-    public class CheckHavent extends AsyncTask<String,String,ArrayList<String>>
+    public class InsertClassesTaken extends AsyncTask<String,String,ArrayList<String>>
     {
         String z = "";
         Boolean isSuccess = false;
@@ -177,37 +179,32 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
         protected void onPreExecute()
         {
 
-            //progressBar.setVisibility(View.VISIBLE);
-
-
-
         }
 
         @Override
         protected void onPostExecute(ArrayList<String> r)
         {
-            arrayAdapterToDo2.clear();
             //note the input type of the onPostExecute is changed into ArrayList<String>, which is the output from doInBackGround method
             //progressBar.setVisibility(View.GONE);
             //Toast.makeText(MainActivity.this, r, Toast.LENGTH_LONG).show();
             //iterate through the arrayList and write it into your
-            Iterator<String> iterator = r.iterator();
+            /*Iterator<String> iterator = r.iterator();
             while (iterator.hasNext()) {
-                arrayAdapterToDo2.add(iterator.next().toString());
-            }
+                arrayAdapterToDo.add(iterator.next().toString());
+            }*/
 
-            if(isSuccess)
+            /*if(isSuccess)
             {
                 message = (TextView) findViewById(R.id.textView2);
                 message.setText(name1);
 
-            }
+            }*/
         }
 
         @Override
         protected ArrayList<String> doInBackground(String... params)
         {
-            ArrayList<String> names2 = null;
+            ArrayList<String> names = null;
             try
             {
                 con = connectionclass();        // Connect to database
@@ -217,46 +214,46 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
                 }
                 else
                 {
-
-                    // Change below query according to your own database.
-
-                    String query = "SELECT name + ' - ' + subject_title as coursestuff FROM Course WHERE courseid IN (SELECT prereqid FROM PreReq WHERE courseid = (SELECT courseid FROM Course where name = '" + selectedCourse + "') AND prereqid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ")) UNION SELECT name + ' - ' + subject_title + '  *Completed*' FROM Course WHERE courseid IN (SELECT prereqid FROM PreReq WHERE courseid = (SELECT courseid FROM Course where name = '" + selectedCourse + "') AND prereqid  IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ")) ;";
-                    Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-
-                    names2 = new ArrayList<String>();
-                    ids = new ArrayList<Integer>();
-                    while (rs.next()){
-                        String title = rs.getString("coursestuff"); //Name is the string label of a column in database, read through the select query
-
-                        names2.add(title);
+                    ListView listView = (ListView) findViewById(R.id.classList);
+                    ArrayList<Integer> toSend = new ArrayList<Integer>();
+                    String a ="";
+                    //this will loop through each item in the list and checks if they are selected.
+                    for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
+                        if (listView.isItemChecked(i)){
+                            toSend.add(ids.get(i));
+                        }
                     }
 
-
-
-
-                    if (rs.next()) {
-                        name1 = rs.getString("Name"); //Name is the string label of a column in database, read through the select query
-                        z = "query successful";
-                        isSuccess = true;
-                        con.close();
-
-                    } else {
-                        z = "Invalid Query!";
-                        isSuccess = false;
+                    String finalQuery = "";
+                    for (int i=0; i<toSend.size(); i++){
+                        String query = "DELETE FROM CoursesTaken WHERE studentid = " + studentId + " AND coursid = " + toSend.get(i)+ ";";
+                        finalQuery = finalQuery + " " + query;
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(finalQuery);
                     }
+                    /*Statement stmt = con.createStatement();
+                    stmt.executeUpdate(finalQuery);*/
+
+                    name1 = "Insert sucessful";
+                    z = "Sucessful Registration";
+                    isSuccess=true;
+                    con.close();
+                    Intent intent = new Intent(getApplicationContext(), ClassSummary.class);
+                    intent.putExtra("studentid", studentId);
+                    startActivity(intent);
                 }
             }
             catch (Exception ex)
             {
                 isSuccess = false;
                 z = ex.getMessage();
-
                 Log.d ("sql error", z);
             }
-            return names2;
+            return names;
         }
     }
+
+
 
     @SuppressLint("NewApi")
     public Connection connectionclass()
@@ -288,5 +285,24 @@ public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelec
         return connection;
     }
 
+    public void CastSelectedItem (View v) {
+        ListView listView = (ListView) findViewById(R.id.classesToTakeList);
+        ArrayList<String> toSend = new ArrayList<String>();
+        String a ="";
+        //this will loop through each item in the list and checks if they are selected.
+        for(int i=0 ; i<arrayAdapterToDo.getCount() ; i++){
+            if (listView.isItemChecked(i)){
+                a = a + arrayListToDo.get(i);
+                toSend.add(arrayListToDo.get(i));
+
+            }
+        }
+        Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent (this, SelectCourses.class);
+        //this is how you send multiple strings to next activity
+        intent.putStringArrayListExtra("toSend", toSend);
+        startActivity(intent);
+
+    }
 
 }
