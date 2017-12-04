@@ -175,7 +175,6 @@
                     android:alpha=".9"
                     android:background="@drawable/buttons"
                     android:backgroundTint="@android:color/background_light"
-                    android:popupBackground="@drawable/buttons"
                     android:text="[Select a Degree Plan]"
                     android:visibility="visible" />
 

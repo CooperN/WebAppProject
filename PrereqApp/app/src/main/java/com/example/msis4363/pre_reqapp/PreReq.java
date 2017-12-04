@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PreReq extends AppCompatActivity {
+public class PreReq extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public Connection con;
     public TextView message;
@@ -34,8 +36,7 @@ public class PreReq extends AppCompatActivity {
     private String selectedChoice = "";
     ArrayList<Integer> ids = null;
     Integer studentId;
-
-
+    String selectedCourse;
 
 
     @Override
@@ -47,6 +48,15 @@ public class PreReq extends AppCompatActivity {
         arrayAdapterToDo = new ArrayAdapter<String>(this, R.layout.row, R.id.row, arrayListToDo);
         final ListView listView = (ListView) findViewById(R.id.classesToTakeList);
 
+        Spinner spinner = (Spinner) findViewById(R.id.registrationspinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.majors_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
         listView.setAdapter(arrayAdapterToDo);
 
         arrayListToDo2 = new ArrayList<String>();
@@ -54,7 +64,7 @@ public class PreReq extends AppCompatActivity {
         final ListView listView2 = (ListView) findViewById(R.id.prereqList);
         listView2.setAdapter(arrayAdapterToDo2);
 
-
+        spinner.setOnItemSelectedListener(this);
 
         PreReq.CheckLogin checkLogin = new PreReq.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
         checkLogin.execute("");
@@ -62,6 +72,17 @@ public class PreReq extends AppCompatActivity {
         checkhavent.execute("");
 
 
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedCourse = parent.getItemAtPosition((position)).toString();
+        Toast.makeText(parent.getContext(), "Selected: " + selectedCourse, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 

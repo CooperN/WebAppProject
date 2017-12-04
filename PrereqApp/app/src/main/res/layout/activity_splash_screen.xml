@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.msis4363.pre_reqapp.splashScreen">
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/osubw" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,27 +13,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="250dp"
+            android:background="@android:color/darker_gray"
             android:orientation="vertical">
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:paddingStart="20dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/osu" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:orientation="vertical"></LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
             android:orientation="vertical">
 
             <TextView
@@ -50,12 +32,12 @@
                 android:alpha=".8"
                 android:background="@drawable/buttons"
                 android:fontFamily="monospace"
-                android:text="TextView"
+                android:text="Welcome!"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
-                tools:text="Welcome!" />
+                android:textStyle="bold"></TextView>
+
         </LinearLayout>
 
     </LinearLayout>
