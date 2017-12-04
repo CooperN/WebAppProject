@@ -155,7 +155,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="10dp"
             android:layout_weight="0.07"
             android:orientation="vertical"
             android:visibility="visible"></LinearLayout>
@@ -172,7 +172,7 @@
                 android:shadowColor="@android:color/background_light"
                 android:shadowRadius="2"
                 android:text="Select Your Major Below"
-                android:textColor="#f17a0a" />
+                android:textColor="?android:attr/colorFocusedHighlight" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -200,7 +200,7 @@
             android:id="@+id/Register"
             android:layout_width="150dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_weight=".8"
             android:background="@drawable/buttons"
             android:onClick="onSignUpClick"
             android:text="REGISTER"
@@ -209,7 +209,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="2dp"
             android:layout_weight="0.67"
             android:orientation="vertical"></LinearLayout>
 
