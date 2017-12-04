@@ -8,6 +8,13 @@
     tools:context="com.example.msis4363.pre_reqapp.SelectCourses"
     android:background="@android:color/background_light">
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/chioclockbw" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -27,11 +34,11 @@
 
         <ImageView
             android:id="@+id/imageView8"
-            android:layout_width="64dp"
+            android:layout_width="100dp"
             android:layout_height="63dp"
-            android:adjustViewBounds="true"
+            android:adjustViewBounds="false"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ostatelogo" />
+            app:srcCompat="@drawable/osu" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -39,25 +46,28 @@
             android:layout_height="5dip"></LinearLayout>
 
         <TextView
-            android:text="Select courses you have taken:"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/textView"
+            android:alpha=".9"
+            android:background="@drawable/buttons"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Select courses you have taken:"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
-            android:background="@drawable/buttons"
-            android:textStyle="normal|bold"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dp"/>
+            android:textStyle="normal|bold" />
 
         <ListView
+            android:id="@+id/classList"
             android:layout_width="match_parent"
             android:layout_height="154dp"
-            android:layout_weight="1.04"
-            android:id="@+id/classList"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.04"
+            android:alpha=".9"
+            android:background="@android:color/background_light" />
 
         <LinearLayout
             android:orientation="vertical"
