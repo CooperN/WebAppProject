@@ -3,9 +3,6 @@ package com.example.msis4363.pre_reqapp;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.StrictMode;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -17,80 +14,48 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Profile extends AppCompatActivity {
-    Integer studentId;
+/**
+ * Created by Cooper on 12/4/2017.
+ */
 
+public class Database {
     // Declaring connection variables
-    public Connection con;
-    String un, pass, db, ip, fname, lname, newText;
-    public TextView message;
-    public ProgressBar progressBar;
+    private Connection con;
+    private String un = "hberryadmin";
+    private String pass = "Equifax1";
+    private String db = "PrereqDB";
+    private String ip = "huckleberries.database.windows.net:1433";
+    private String SQLquery;
+    ResultSet rs;
 
-    Database database = new Database();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        studentId = getIntent().getIntExtra("studentid", 0);
-
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        ip = "huckleberries.database.windows.net:1433";
-        db = "PrereqDB";
-        un = "hberryadmin";
-        pass = "Equifax1";
-
-        Profile.CheckLogin checkLogin = new Profile.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-        checkLogin.execute("");
-
-        String query = "SELECT pname FROM Program WHERE programid = (SELECT programid FROM StudentDegree WHERE studentid = "+studentId+")";
-
-        ResultSet result = database.select(query);
-        TextView t4 = (TextView) findViewById(R.id.textViewMajor);
-        //t4.setText(ResultSet.getString("pname"));
-    }
-
-    public class CheckLogin extends AsyncTask<String, String, String> {
+    private class selectSQL extends AsyncTask<String, String, String> {
         String z = "";
         Boolean isSuccess = false;
         String un = "";
         String pw = "";
 
         protected void onPreExecute() {
-            progressBar.setVisibility(View.GONE);
         }
 
         @Override
         protected void onPostExecute(String r) {
-            progressBar.setVisibility(View.GONE);
             if (isSuccess) {
-                TextView t1 = (TextView) findViewById(R.id.textViewFname);
-                TextView t2 = (TextView) findViewById(R.id.textViewLname);
-                TextView t3 = (TextView) findViewById(R.id.textViewUname);
-                t1.setText(fname);
-                t2.setText(lname);
-                t3.setText(un);
+
             }
         }
 
         @Override
         protected String doInBackground(String... params) {
+
             try {
                 con = connectionclass();        // Connect to database
                 if (con == null) {
                     z = "Check Your Internet Access!";
                 } else {
                     // Change below query according to your own database.
-                    String query = "select * from Student where studentid = '" + studentId + "';";
+                    String query = SQLquery;
                     Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-                    if (rs.next()) {
-                        un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
-                        pw = rs.getString("pw");
-                        fname = rs.getString("fname"); //Name is the string label of a column in database, read through the select query
-                        lname = rs.getString("lname");
-                    }
+                    rs = stmt.executeQuery(query);
                     isSuccess = true;
                 }
             } catch (Exception ex) {
@@ -100,8 +65,21 @@ public class Profile extends AppCompatActivity {
             }
             return z;
         }
+
     }
 
+    public ResultSet select(String query) {
+        SQLquery = query;
+        Database.selectSQL selectSQL = new Database.selectSQL();// this is the Asynctask, which is used to process in background to reduce load on app process
+        selectSQL.execute("");
+        return rs;
+    }
+    public User getUserInfo(Integer userId){
+        User student = new User();
+
+
+        return student;
+    }
     @SuppressLint("NewApi")
     public Connection connectionclass() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -125,4 +103,3 @@ public class Profile extends AppCompatActivity {
 
     }
 }
-
