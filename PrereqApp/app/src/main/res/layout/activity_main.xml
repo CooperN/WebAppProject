@@ -33,6 +33,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:paddingStart="20dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/osu" />
         </LinearLayout>
