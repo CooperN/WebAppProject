@@ -108,12 +108,13 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
 
         EditText a = (EditText) findViewById(R.id.registerUser);
         String userstr = a.getText().toString();
-        EditText b = (EditText) findViewById(R.id.registerPass);
-        String passstr = b.getText().toString();
         EditText c = (EditText) findViewById(R.id.registerFirstName);
         String fnamestr = c.getText().toString();
         EditText d = (EditText) findViewById(R.id.registerLastName);
         String lnamestr = d.getText().toString();
+
+        EditText b = (EditText) findViewById(R.id.registerPass);
+        String passstr = b.getText().toString();
 
 
         protected void onPreExecute()
