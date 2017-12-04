@@ -47,7 +47,7 @@
             android:id="@+id/selectBtn"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:alpha=".75"
+            android:alpha=".7"
             android:background="@drawable/buttons"
             android:onClick="btnClassesToTake"
             android:text="Class Summary Page"
@@ -57,14 +57,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/summaryBtn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:alpha=".75"
+            android:alpha=".7"
             android:background="@drawable/buttons"
             android:onClick="btnFinishedCourses"
             android:text="Select Courses"
@@ -74,14 +74,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:alpha=".75"
+            android:alpha=".7"
             android:background="@drawable/buttons"
             android:elevation="0dp"
             android:onClick="btnDegreeSheet"
@@ -92,14 +92,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:alpha=".75"
+            android:alpha=".7"
             android:background="@drawable/buttons"
             android:elevation="0dp"
             android:onClick="btnPrereqCourses"
@@ -110,7 +110,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:orientation="vertical">
 
         </LinearLayout>
@@ -119,7 +119,7 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:alpha=".75"
+            android:alpha=".7"
             android:background="@drawable/buttons"
             android:shadowColor="@android:color/background_dark"
             android:shadowRadius="2"
@@ -128,14 +128,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:alpha=".75"
+            android:alpha=".7"
             android:background="@drawable/buttons"
             android:shadowColor="@android:color/black"
             android:shadowRadius="2"
