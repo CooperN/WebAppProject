@@ -77,13 +77,29 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        major = parent.getItemAtPosition((position)).toString();
+        Toast.makeText(parent.getContext(), "Selected: " + major, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> arg0) {
 
     }
+
+    /*@Override
+    public void SpinnerActivity extends Activity implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            // An item was selected. You can retrieve the selected item using
+            // parent.getItemAtPosition(pos)
+            major = parent.getItemAtPosition((pos)).toString();
+        }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+        major = "MSIS";
+    }
+}*/
 
     public class Insert extends AsyncTask<String,String,String>
     {
@@ -123,16 +139,17 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
         @Override
         protected String doInBackground(String... params)
         {
-            if(major == "MSIS"){
+            if(major.equals("MSIS")){
                 majorid = 1;
             }
-            /*else if(major == "Finance"){
-                majorid = 2
-            }*/
-            /*else {
+            else if(major.equals("")){
+                z = "Please select a major";
+                return z;
+            }
+            else {
                 z = "Please select a different major";
                 return z;
-            }*/
+            }
             try
             {
                 con = connectionclass();        // Connect to database
@@ -198,18 +215,6 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
         return connection;
     }
 
-    public class SpinnerActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            // An item was selected. You can retrieve the selected item using
-            // parent.getItemAtPosition(pos)
-            major = parent.getItemAtPosition((pos)).toString();
-        }
-
-        public void onNothingSelected(AdapterView<?> parent) {
-            // Another interface callback
-            major = "MSIS";
-        }
-    }
 
 }
