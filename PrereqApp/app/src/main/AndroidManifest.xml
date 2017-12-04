@@ -22,9 +22,13 @@
         <activity android:name=".Register" />
         <activity android:name=".ClassSummary" />
         <activity android:name=".Main" />
+<<<<<<< HEAD
         <activity android:name=".SelectCourses" />
         <activity android:name=".splashScreen" />
         <activity android:name=".PreReq"></activity>
+=======
+        <activity android:name=".SelectCourses"></activity>
+>>>>>>> c3b0776da3731b703c443c089d4a576ba483ed1d
     </application>
 
 </manifest>
