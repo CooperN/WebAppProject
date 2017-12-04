@@ -39,7 +39,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
         // End Getting values from button, texts and progress bar
         run = (Button) findViewById(R.id.btnLogin);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
