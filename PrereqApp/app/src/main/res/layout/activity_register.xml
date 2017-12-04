@@ -57,6 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowRadius="2"
             android:text="FIRST NAME"
             android:textColor="?android:attr/colorFocusedHighlight"
             android:textSize="14sp"
@@ -85,6 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="2"
             android:text="LAST NAME"
             android:textColor="?android:attr/colorFocusedHighlight"
             android:textSize="14sp"
@@ -113,6 +117,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="2"
             android:text="USERNAME"
             android:textColor="?android:attr/colorFocusedHighlight"
             android:textSize="14sp"
@@ -140,6 +146,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:shadowRadius="2"
             android:text="PASSWORD"
             android:textColor="?android:attr/colorFocusedHighlight"
             android:textSize="14sp"
@@ -161,8 +169,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#f17a0a"
-                android:text="Select Your Major Below" />
+                android:shadowColor="@android:color/background_light"
+                android:shadowRadius="2"
+                android:text="Select Your Major Below"
+                android:textColor="#f17a0a" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -26,7 +26,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="15dp"
                 android:orientation="vertical"></LinearLayout>
 
             <ImageView
@@ -38,10 +38,15 @@
                 app:srcCompat="@drawable/osu" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="vertical"></LinearLayout>
+
         <Button
             android:id="@+id/selectBtn"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="55dp"
             android:alpha=".75"
             android:background="@drawable/buttons"
             android:onClick="btnClassesToTake"
@@ -52,13 +57,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/summaryBtn"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="50dp"
             android:alpha=".75"
             android:background="@drawable/buttons"
             android:onClick="btnFinishedCourses"
@@ -69,13 +74,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="50dp"
             android:alpha=".75"
             android:background="@drawable/buttons"
             android:elevation="0dp"
@@ -87,13 +92,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
             android:orientation="vertical"></LinearLayout>
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="50dp"
             android:alpha=".75"
             android:background="@drawable/buttons"
             android:elevation="0dp"
@@ -102,6 +107,40 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textSize="20sp"
             android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:alpha=".75"
+            android:background="@drawable/buttons"
+            android:shadowColor="@android:color/background_dark"
+            android:shadowRadius="2"
+            android:text="Button"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:orientation="vertical"></LinearLayout>
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:alpha=".75"
+            android:background="@drawable/buttons"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="2"
+            android:text="Button"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

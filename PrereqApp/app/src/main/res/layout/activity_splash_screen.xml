@@ -48,7 +48,7 @@
                 android:alpha=".8"
                 android:background="@drawable/buttons"
                 android:fontFamily="monospace"
-                android:text="Welcome!"
+                android:text=" Welcome!"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@android:color/white"
