@@ -3,10 +3,12 @@ package com.example.msis4363.pre_reqapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,26 +21,43 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.*;
+
+public class LoginSplashScreen extends AppCompatActivity {
+    Integer studentId;
 
 
-public class Login extends AppCompatActivity {
+    // Splash screen timer
+    private static int SPLASH_TIME_OUT = 3000;
 
-    // Declaring connection variables
-    public Connection con;
-    String un,pass,db,ip;
+    TextView t=(TextView)findViewById(R.id.textView4);
 
-    public Button run;
-    public Button register;
-    public TextView message;
-    public ProgressBar progressBar;
-
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_splash_screen);
+        studentId = getIntent().getIntExtra("studentid", 0);
 
 
+        new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                Intent i = new Intent(getApplicationContext(), Main.class);
+                i.putExtra("studentid", studentId);
+
+                startActivity(i);
+
+                // close this activity
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
         // End Getting values from button, texts and progress bar
         run = (Button) findViewById(R.id.btnLogin);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -68,7 +87,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                CheckLogin checkLogin = new CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
+                Login.CheckLogin checkLogin = new Login.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
                 checkLogin.execute("");
             }
         });
@@ -201,20 +220,5 @@ public class Login extends AppCompatActivity {
         return connection;
     }
 
-    /*public void btnLogin(View v) {
-        EditText username = (EditText) findViewById(R.id.userName);
-        EditText password = (EditText) findViewById(R.id.userPass);
 
-        String usernamstr = username.getText().toString();
-        String passwordstr = password.getText().toString();
-
-
-        Intent intent = new Intent(getApplicationContext(), Login.class);
-        startActivity(intent);
-    }*/
-
-    /*public void btnSignUpClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), Register.class);
-        startActivity(intent);
-    }*/
 }

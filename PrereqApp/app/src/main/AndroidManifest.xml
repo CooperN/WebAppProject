@@ -24,7 +24,9 @@
         <activity android:name=".Main" />
         <activity android:name=".SelectCourses" />
         <activity android:name=".PreReq" />
-        <activity android:name=".DeleteCourses"></activity>
+        <activity android:name=".DeleteCourses" />
+        <activity android:name=".Profile" />
+        <activity android:name=".LoginSplashScreen"></activity>
     </application>
 
 </manifest>

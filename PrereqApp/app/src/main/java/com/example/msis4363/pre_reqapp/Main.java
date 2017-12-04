@@ -43,7 +43,7 @@ public class Main extends AppCompatActivity {
     }
 
     public void btnProfile(View v) {
-        Intent intent2 = new Intent(getApplicationContext(), SelectCourses.class);
+        Intent intent2 = new Intent(getApplicationContext(), Profile.class);
         intent2.putExtra("studentid", studentId);
         startActivity(intent2);
     }
