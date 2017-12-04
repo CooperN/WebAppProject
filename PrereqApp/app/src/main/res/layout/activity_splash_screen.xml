@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.msis4363.pre_reqapp.splashScreen">
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/osubw" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="175dp"
             android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
@@ -32,7 +25,7 @@
                 android:id="@+id/imageView13"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:paddingStart="25dp"
+                android:paddingStart="12dp"
                 android:src="@drawable/osu" />
         </LinearLayout>
 
@@ -40,19 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha=".8"
-                android:background="@drawable/buttons"
-                android:fontFamily="monospace"
-                android:text=" Welcome!"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"></TextView>
 
         </LinearLayout>
 
