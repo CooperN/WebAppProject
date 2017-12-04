@@ -22,7 +22,8 @@
         <activity android:name=".ClassSummary" />
         <activity android:name=".Main" />
         <activity android:name=".SelectCourses" />
-        <activity android:name=".splashScreen"></activity>
+        <activity android:name=".splashScreen" />
+        <activity android:name=".PreReq"></activity>
     </application>
 
 </manifest>
