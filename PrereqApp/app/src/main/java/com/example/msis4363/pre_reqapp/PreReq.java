@@ -117,8 +117,7 @@ public class PreReq extends AppCompatActivity {
                 {
 
                     // Change below query according to your own database.
-
-                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ");";
+                    String query = "SELECT * FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = " + studentId + ")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = " + studentId + ") AND courseid IN (Select courseid from PreReq);";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 

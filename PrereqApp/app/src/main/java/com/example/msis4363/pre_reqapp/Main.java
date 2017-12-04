@@ -30,6 +30,12 @@ public class Main extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    public void btnPrereqCourses(View v) {
+        Intent intent2 = new Intent(getApplicationContext(), PreReq.class);
+        intent2.putExtra("studentid", studentId);
+        startActivity(intent2);
+    }
+
     public void btnDegreeSheet(View v) {
         String url = "https://business.okstate.edu/site-files/docs/msis/2016-2017-MIS.pdf";
         Intent i = new Intent(Intent.ACTION_VIEW);

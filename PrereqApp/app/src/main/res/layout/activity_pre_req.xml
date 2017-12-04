@@ -50,21 +50,22 @@
             android:alpha=".9"
             android:background="@drawable/buttons"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
+            android:paddingLeft="50dp"
             android:text="                Courses with Prerequisites:"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/classesToTakeList"
+        <Spinner
+            android:id="@+id/prereqspinner"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1.04"
+            android:layout_height="50dp"
             android:alpha=".9"
-            android:background="@android:color/background_light" />
+            android:background="@drawable/buttons"
+            android:backgroundTint="@android:color/background_light"
+            android:popupBackground="@drawable/buttons"
+            android:text="[Select a Prerequisite]"
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"

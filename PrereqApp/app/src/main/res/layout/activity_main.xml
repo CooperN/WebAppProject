@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="125dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -81,6 +81,24 @@
             android:elevation="0dp"
             android:onClick="btnDegreeSheet"
             android:text="Degree Plan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="vertical"></LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:alpha=".75"
+            android:background="@drawable/buttons"
+            android:elevation="0dp"
+            android:onClick="btnPrereqCourses"
+            android:text="Prerequisite Courses"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textSize="20sp"
             android:textStyle="normal" />
