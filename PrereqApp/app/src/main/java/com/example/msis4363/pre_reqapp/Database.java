@@ -26,21 +26,32 @@ public class Database {
     private String db = "PrereqDB";
     private String ip = "huckleberries.database.windows.net:1433";
     private String SQLquery;
-    ResultSet rs;
+    private MyListener dbProcessListener;
+    private Integer studentId;
+    User student = new User();
 
-    private class selectSQL extends AsyncTask<String, String, String> {
+    boolean doingUser = false;
+
+    public void setDbProcesslistener(MyListener dbProcessListener){
+        this.dbProcessListener = dbProcessListener;
+    }
+
+    public class selectSQL extends AsyncTask<String, String, String> {
         String z = "";
         Boolean isSuccess = false;
         String un = "";
         String pw = "";
+
 
         protected void onPreExecute() {
         }
 
         @Override
         protected void onPostExecute(String r) {
-            if (isSuccess) {
-
+            if (isSuccess) {}
+            if (doingUser) {
+                doingUser = false;
+                dbProcessListener.onEvent(true);
             }
         }
 
@@ -55,8 +66,20 @@ public class Database {
                     // Change below query according to your own database.
                     String query = SQLquery;
                     Statement stmt = con.createStatement();
-                    rs = stmt.executeQuery(query);
+                    ResultSet rs = stmt.executeQuery(query);
+                    if (doingUser) {
+                        if(rs.next()) {
+                            isSuccess = true;
+                            String uname = rs.getString("username");
+                            student.setUn(uname); //Name is the string label of a column in database, read through the select query
+                            student.setFname(rs.getString("fname")); //Name is the string label of a column in database, read through the select query
+                            student.setLname(rs.getString("lname"));
+                            student.setId(rs.getString("studentid"));
+                            student.setDegree(rs.getString("pname"));
+                        }
+                    }
                     isSuccess = true;
+                    con.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
@@ -65,21 +88,26 @@ public class Database {
             }
             return z;
         }
-
+        Boolean idSuccess = false;
     }
 
-    public ResultSet select(String query) {
+    public void select(String query) {
         SQLquery = query;
         Database.selectSQL selectSQL = new Database.selectSQL();// this is the Asynctask, which is used to process in background to reduce load on app process
         selectSQL.execute("");
-        return rs;
     }
-    public User getUserInfo(Integer userId){
-        User student = new User();
+    public void getUserInfo(Integer userId){
+        studentId = userId;
+        SQLquery = "SELECT s.username, s.fname, s.lname,s.studentid, p.pname FROM Program p JOIN StudentDegree sd ON p.programid = sd.programid JOIN Student s ON sd.studentid = s.studentid AND s.studentid = '" + studentId + "'";
+        doingUser = true;
+        Database.selectSQL selectSQL = new Database.selectSQL();// this is the Asynctask, which is used to process in background to reduce load on app process
+        selectSQL.execute("");
+    }
 
-
+    public User getUser(){
         return student;
     }
+
     @SuppressLint("NewApi")
     public Connection connectionclass() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

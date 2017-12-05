@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements MyListener{
     Integer studentId;
 
     // Declaring connection variables
@@ -25,30 +25,43 @@ public class Profile extends AppCompatActivity {
     String un, pass, db, ip, fname, lname, newText;
     public TextView message;
     public ProgressBar progressBar;
+    User currentUser = new User();
 
     Database database = new Database();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         studentId = getIntent().getIntExtra("studentid", 0);
-
-
+        database.setDbProcesslistener(this);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         ip = "huckleberries.database.windows.net:1433";
         db = "PrereqDB";
         un = "hberryadmin";
         pass = "Equifax1";
 
+        database.getUserInfo(studentId);
+
         Profile.CheckLogin checkLogin = new Profile.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
         checkLogin.execute("");
 
-        String query = "SELECT pname FROM Program WHERE programid = (SELECT programid FROM StudentDegree WHERE studentid = "+studentId+")";
+    }
 
-        ResultSet result = database.select(query);
-        TextView t4 = (TextView) findViewById(R.id.textViewMajor);
-        //t4.setText(ResultSet.getString("pname"));
+    @Override
+    public void onEvent(boolean blnProcessIsFinished) {
+        if(blnProcessIsFinished) {
+            currentUser = database.getUser();
+            TextView t1 = (TextView) findViewById(R.id.textViewFname);
+            TextView t2 = (TextView) findViewById(R.id.textViewLname);
+            TextView t3 = (TextView) findViewById(R.id.textViewUname);
+            TextView t4 = (TextView) findViewById(R.id.textViewMajor);
+            t1.setText(currentUser.getFname());
+            t2.setText(currentUser.getLname());
+            t3.setText(currentUser.getUn());
+            t4.setText(currentUser.getDegree());
+        }
     }
 
     public class CheckLogin extends AsyncTask<String, String, String> {
@@ -65,12 +78,7 @@ public class Profile extends AppCompatActivity {
         protected void onPostExecute(String r) {
             progressBar.setVisibility(View.GONE);
             if (isSuccess) {
-                TextView t1 = (TextView) findViewById(R.id.textViewFname);
-                TextView t2 = (TextView) findViewById(R.id.textViewLname);
-                TextView t3 = (TextView) findViewById(R.id.textViewUname);
-                t1.setText(fname);
-                t2.setText(lname);
-                t3.setText(un);
+
             }
         }
 
@@ -92,6 +100,7 @@ public class Profile extends AppCompatActivity {
                         lname = rs.getString("lname");
                     }
                     isSuccess = true;
+                    con.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
