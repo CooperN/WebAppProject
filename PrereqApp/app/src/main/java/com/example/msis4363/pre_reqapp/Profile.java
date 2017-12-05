@@ -47,6 +47,9 @@ public class Profile extends AppCompatActivity implements MyListener{
         Profile.CheckLogin checkLogin = new Profile.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
         checkLogin.execute("");
 
+        Profile.AddHours addhours = new Profile.AddHours();
+        addhours.execute("");
+
     }
 
 
@@ -127,9 +130,9 @@ public class Profile extends AppCompatActivity implements MyListener{
             progressBar.setVisibility(View.GONE);
             if (isSuccess) {
 
-                TextView t4 = (TextView) findViewById(R.id.textViewHLeft);
+                TextView hours = (TextView) findViewById(R.id.textViewHLeft);
 
-                t4.setText(hleft);
+                hours.setText("Hours Taken: " + String.valueOf(hleft));
             }
         }
 
@@ -144,7 +147,7 @@ public class Profile extends AppCompatActivity implements MyListener{
                     String query = "Select sum(c_hours) AS HourTotal from Course where courseid IN (Select DISTINCT coursid from CoursesTaken where studentid = " + studentId + ");";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
-                    
+
                     if (rs.next()) {
                         hleft = rs.getInt("HourTotal");
                     }
