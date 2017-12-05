@@ -5,7 +5,7 @@ package com.example.msis4363.pre_reqapp;
  */
 
 public class User {
-    private String un, fname, lname, pass, degree, id;
+    private String un, fname, lname, degree, id;
 
     public void setUn(String un) {
         this.un = un;
@@ -22,9 +22,6 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
 
     public String getDegree() {
         return degree;
@@ -37,9 +34,6 @@ public class User {
     }
     public String getLname() {
         return lname;
-    }
-    public String getPass() {
-        return pass;
     }
     public String getUn() {
         return un;
