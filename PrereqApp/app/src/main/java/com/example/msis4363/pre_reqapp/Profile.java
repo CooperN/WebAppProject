@@ -23,6 +23,7 @@ public class Profile extends AppCompatActivity implements MyListener{
     // Declaring connection variables
     public Connection con;
     String un, pass, db, ip, fname, lname, newText;
+    Integer i;
     public TextView message;
     public ProgressBar progressBar;
     User currentUser = new User();
@@ -44,11 +45,11 @@ public class Profile extends AppCompatActivity implements MyListener{
 
         database.getUserInfo(studentId);
 
-        Profile.CheckLogin checkLogin = new Profile.CheckLogin();// this is the Asynctask, which is used to process in background to reduce load on app process
-        checkLogin.execute("");
-
         Profile.AddHours addhours = new Profile.AddHours();
         addhours.execute("");
+
+        Profile.AddHours2 addhours2 = new Profile.AddHours2();
+        addhours2.execute("");
 
     }
 
@@ -68,53 +69,6 @@ public class Profile extends AppCompatActivity implements MyListener{
         }
     }
 
-    public class CheckLogin extends AsyncTask<String, String, String> {
-        String z = "";
-        Boolean isSuccess = false;
-        String un = "";
-        String pw = "";
-
-        protected void onPreExecute() {
-            progressBar.setVisibility(View.GONE);
-        }
-
-        @Override
-        protected void onPostExecute(String r) {
-            progressBar.setVisibility(View.GONE);
-            if (isSuccess) {
-
-            }
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                con = connectionclass();        // Connect to database
-                if (con == null) {
-                    z = "Check Your Internet Access!";
-                } else {
-                    // Change below query according to your own database.
-                    String query = "select * from Student where studentid = '" + studentId + "';";
-                    Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-                    if (rs.next()) {
-                        un = rs.getString("username"); //Name is the string label of a column in database, read through the select query
-                        pw = rs.getString("pw");
-                        fname = rs.getString("fname"); //Name is the string label of a column in database, read through the select query
-                        lname = rs.getString("lname");
-                    }
-                    isSuccess = true;
-                    con.close();
-                }
-            } catch (Exception ex) {
-                isSuccess = false;
-                z = ex.getMessage();
-                Log.d("sql error", z);
-            }
-            return z;
-        }
-    }
-
     public class AddHours extends AsyncTask<String, String, String> {
         String z = "";
         Boolean isSuccess = false;
@@ -131,7 +85,51 @@ public class Profile extends AppCompatActivity implements MyListener{
             if (isSuccess) {
 
                 TextView hours = (TextView) findViewById(R.id.textViewHLeft);
+                hours.setText("Hours Left: " + String.valueOf(hleft));
+            }
+        }
 
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                con = connectionclass();        // Connect to database
+                if (con == null) {
+                    z = "Check Your Internet Access!";
+                } else {
+                    // Change below query according to your own database.
+                    String query = "SELECT sum(c_hours) AS HourTotal FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = "+studentId+")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = "+studentId+")";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    if (rs.next()) {
+                        hleft = rs.getInt("HourTotal");
+                    }
+                    isSuccess = true;
+                }
+            } catch (Exception ex) {
+                isSuccess = false;
+                z = ex.getMessage();
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+    public class AddHours2 extends AsyncTask<String, String, String> {
+        String z = "";
+        Boolean isSuccess = false;
+        Integer hleft;
+        String pw = "";
+
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            progressBar.setVisibility(View.GONE);
+            if (isSuccess) {
+
+                TextView hours = (TextView) findViewById(R.id.textViewHTaken);
                 hours.setText("Hours Taken: " + String.valueOf(hleft));
             }
         }
@@ -144,7 +142,7 @@ public class Profile extends AppCompatActivity implements MyListener{
                     z = "Check Your Internet Access!";
                 } else {
                     // Change below query according to your own database.
-                    String query = "Select sum(c_hours) AS HourTotal from Course where courseid IN (Select DISTINCT coursid from CoursesTaken where studentid = " + studentId + ");";
+                    String query = "SELECT sum(c_hours) AS HourTotal FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = "+studentId+")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = "+studentId+")";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 

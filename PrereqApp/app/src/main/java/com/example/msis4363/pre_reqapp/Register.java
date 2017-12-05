@@ -141,6 +141,12 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
             if(major.equals("MSIS")){
                 majorid = 1;
             }
+            else if(major.equals("MKTG")){
+                majorid = 3;
+            }
+            else if(major.equals("MGMT")){
+                majorid = 2;
+            }
             else if(major.equals("")){
                 z = "Please select a major";
                 return z;

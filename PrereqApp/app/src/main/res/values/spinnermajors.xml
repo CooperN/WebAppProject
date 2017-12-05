@@ -2,8 +2,7 @@
 <resources>
     <string-array name="majors_array">
         <item>MSIS</item>
-        <item>Finance</item>
-        <item>Accounting</item>
-        <item>Marketing</item>
+        <item>MKTG</item>
+        <item>MGMT</item>
     </string-array>
 </resources>
