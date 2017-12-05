@@ -220,15 +220,18 @@
                         android:id="@+id/button7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Delete All Courses"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:background="@drawable/buttons"
+                        android:text="Delete All Courses" />
 
                     <Button
                         android:id="@+id/button8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Delete Profile"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:background="@drawable/buttons"
+                        android:text="Delete Profile" />
 
                 </LinearLayout>
 
