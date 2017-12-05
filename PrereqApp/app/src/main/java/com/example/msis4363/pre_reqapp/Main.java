@@ -49,7 +49,7 @@ public class Main extends AppCompatActivity {
     }
 
     public void btnDegreeSheet(View v) {
-        String url = "https://business.okstate.edu/site-files/docs/msis/2016-2017-MIS.pdf";
+        String url = "https://business.okstate.edu/undergraduate/degree-requirements.html";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
