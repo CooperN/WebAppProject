@@ -48,7 +48,7 @@ public class Profile extends AppCompatActivity {
 
         ResultSet result = database.select(query);
         TextView t4 = (TextView) findViewById(R.id.textViewMajor);
-        //t4.setText(ResultSet.getString("pname"));
+        //t4.setText(result.getString("pname"));
     }
 
     public class CheckLogin extends AsyncTask<String, String, String> {
@@ -90,6 +90,53 @@ public class Profile extends AppCompatActivity {
                         pw = rs.getString("pw");
                         fname = rs.getString("fname"); //Name is the string label of a column in database, read through the select query
                         lname = rs.getString("lname");
+                    }
+                    isSuccess = true;
+                }
+            } catch (Exception ex) {
+                isSuccess = false;
+                z = ex.getMessage();
+                Log.d("sql error", z);
+            }
+            return z;
+        }
+    }
+
+    public class AddHours extends AsyncTask<String, String, String> {
+        String z = "";
+        Boolean isSuccess = false;
+        Integer hleft;
+        String pw = "";
+
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            progressBar.setVisibility(View.GONE);
+            if (isSuccess) {
+
+                TextView t4 = (TextView) findViewById(R.id.textViewHLeft);
+
+                t4.setText(hleft);
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                con = connectionclass();        // Connect to database
+                if (con == null) {
+                    z = "Check Your Internet Access!";
+                } else {
+                    // Change below query according to your own database.
+                    String query = "Select sum(c_hours) AS HourTotal from Course where courseid IN (Select DISTINCT coursid from CoursesTaken where studentid = " + studentId + ");";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    
+                    if (rs.next()) {
+                        hleft = rs.getInt("HourTotal");
                     }
                     isSuccess = true;
                 }
