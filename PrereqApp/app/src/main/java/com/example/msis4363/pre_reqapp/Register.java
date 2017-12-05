@@ -165,8 +165,8 @@ public class Register extends AppCompatActivity implements OnItemSelectedListene
                 else
                 {
                     // Change below query according to your own database.
-                    String query = "INSERT INTO Student VALUES ('" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', 1);";
-                    query = query + "INSERT INTO StudentDegree VALUES((SELECT studentid FROM Student WHERE username = '" + userstr + "'),1);";
+                    String query = "INSERT INTO Student VALUES ('" + userstr + "', '" + passstr + "', '" + fnamestr + "', '" + lnamestr + "', '" + majorid + "');";
+                    query = query + "INSERT INTO StudentDegree VALUES((SELECT studentid FROM Student WHERE username = '" + userstr + "'), '" + majorid + "');";
                     // '" + pidstr + "'
 
                     Statement stmt = con.createStatement();

@@ -142,7 +142,7 @@ public class Profile extends AppCompatActivity implements MyListener{
                     z = "Check Your Internet Access!";
                 } else {
                     // Change below query according to your own database.
-                    String query = "SELECT sum(c_hours) AS HourTotal FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = "+studentId+")) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = "+studentId+")";
+                    String query = "SELECT sum(c_hours) AS HourTotal FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = "+studentId+")) AND courseid IN (SELECT coursid FROM CoursesTaken WHERE studentid = "+studentId+")";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
