@@ -115,8 +115,10 @@ public class Database {
 
     public void getHours(Integer userId){
         studentId = userId;
-        SQLquery = "";
+        SQLquery = "SELECT sum(c_hours) AS HourTotal FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = '" + studentId + "')) AND courseid IN (SELECT coursid FROM CoursesTaken WHERE studentid = '" + studentId + "')";
         doingHours = true;
+
+        //SQLquery = "SELECT sum(c_hours) AS HourTotal FROM Course WHERE courseid IN (Select courseid from ProgramRequirement WHERE programid IN (Select programid FROM StudentDegree WHERE studentid = '" + studentId + "')) AND courseid NOT IN (SELECT coursid FROM CoursesTaken WHERE studentid = '" + studentId + "')";
 
     }
 

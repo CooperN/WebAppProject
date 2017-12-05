@@ -49,7 +49,7 @@ public class Profile extends AppCompatActivity implements MyListener{
 
     }
 
-        
+
     @Override
     public void onEvent(boolean blnProcessIsFinished) {
         if(blnProcessIsFinished) {
