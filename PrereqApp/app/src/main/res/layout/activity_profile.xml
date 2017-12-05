@@ -77,7 +77,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:gravity="center"
+                        android:textSize="@dimen/text_size"
+                        android:gravity="center"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -86,8 +87,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
-<<<<<<< HEAD
-                        android:textSize="@dimen/text_size"                        android:gravity="center"
+                        android:textSize="@dimen/text_size"
+                        android:gravity="center"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -111,14 +112,16 @@
                         android:layout_height="wrap_content"
                         android:text="Username:"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:textStyle="bold"/>
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/textViewUname"
                         android:layout_width="275dp"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold"
                         android:gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
@@ -140,7 +143,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:gravity="left"
+                        android:textSize="@dimen/text_size"
+                        android:gravity="left"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -149,7 +153,8 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:gravity="left"
+                        android:textSize="@dimen/text_size"
+                        android:gravity="left"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -173,14 +178,16 @@
                         android:layout_height="wrap_content"
                         android:text="Major:"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textViewMajor"
                         android:layout_width="275dp"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size"                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold"
                         android:gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
