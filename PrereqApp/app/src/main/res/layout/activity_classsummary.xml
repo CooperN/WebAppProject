@@ -49,9 +49,9 @@
             android:layout_marginBottom="20dp"
             android:alpha=".9"
             android:background="@drawable/buttons"
-            android:gravity="center_vertical"
+            android:gravity="center_horizontal"
             android:paddingLeft="20dp"
-            android:text="                Courses You Have Taken:"
+            android:text="Courses You Have Taken:"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -78,9 +78,9 @@
             android:layout_marginBottom="20dp"
             android:alpha=".9"
             android:background="@drawable/buttons"
-            android:gravity="center_vertical"
+            android:gravity="center_horizontal"
             android:paddingLeft="20dp"
-            android:text="          Courses You Have Yet To Take: "
+            android:text="Courses You Have Yet To Take: "
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="normal|bold" />
