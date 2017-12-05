@@ -49,9 +49,7 @@ public class Profile extends AppCompatActivity implements MyListener{
 
     }
 
-        ResultSet result = database.select(query);
-        TextView t4 = (TextView) findViewById(R.id.textViewMajor);
-        //t4.setText(result.getString("pname"));
+        
     @Override
     public void onEvent(boolean blnProcessIsFinished) {
         if(blnProcessIsFinished) {

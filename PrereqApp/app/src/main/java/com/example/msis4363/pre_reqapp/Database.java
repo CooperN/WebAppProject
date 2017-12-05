@@ -31,6 +31,7 @@ public class Database {
     User student = new User();
 
     boolean doingUser = false;
+    boolean doingHours = false;
 
     public void setDbProcesslistener(MyListener dbProcessListener){
         this.dbProcessListener = dbProcessListener;
@@ -51,8 +52,12 @@ public class Database {
             if (isSuccess) {}
             if (doingUser) {
                 doingUser = false;
-                dbProcessListener.onEvent(true);
             }
+            else if(doingHours){
+                doingHours = false;
+            }
+                dbProcessListener.onEvent(true);
+
         }
 
         @Override
@@ -106,6 +111,13 @@ public class Database {
 
     public User getUser(){
         return student;
+    }
+
+    public void getHours(Integer userId){
+        studentId = userId;
+        SQLquery = "";
+        doingHours = true;
+
     }
 
     @SuppressLint("NewApi")
